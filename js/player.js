@@ -6,6 +6,9 @@ function preload_player(){
 
 function create_player(){
   player = game.add.sprite(game.width/2,game.height-128,'player');
+  //resize
+  player.scale.setTo(.5,.5);
+
   //center of player to center of image
   player.anchor.setTo(0.5,0.5);  
   

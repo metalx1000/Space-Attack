@@ -23,7 +23,13 @@ function new_enemy(){
   enemy.scale.setTo(.5,.5);
   game.add.tween(enemy).to({y: game.world.height+256}, speed, "Linear", true);
 
+  enemy.ship = true;
+
   //set delay for next enemy between 1 and 3 seconds
   var delay = Math.floor(Math.random() * 3000) + 1000
   enemy_timer = game.time.now + delay
+}
+
+function kill_enemy(enemy){
+  explosion(enemy);
 }

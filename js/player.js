@@ -19,6 +19,9 @@ function create_player(){
 function update_player(){
   //follow cursor  
   game.physics.arcade.moveToPointer(player, 400);
+  
+  //if player and enemy collide kill player
+  game.physics.arcade.overlap(player, enemies, kill_player, null, this);
 
   //stop movement when player reaches cursor
   if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
@@ -26,4 +29,16 @@ function update_player(){
       player.body.velocity.setTo(0, 0);
   }
 
+}
+
+function kill_player(player, enemy){
+  //call explosions
+  explosion(player);
+  
+  //check if enemy is a ship or bullet
+  if(enemy.ship == true){
+    kill_enemy(enemy);
+  }else{
+    enemy.kill();
+  }
 }

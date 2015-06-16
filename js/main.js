@@ -6,6 +6,7 @@ function preload() {
   preload_level();
   preload_player();
   preload_enemy();
+  preload_weapons();
 }
 
 function create() {

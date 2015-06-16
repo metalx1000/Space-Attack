@@ -4,17 +4,14 @@ var centery = game.height / 2;
 
 function preload() {
   preload_level();
-  preload_player();
 }
 
 function create() {
   create_level();
-  create_player();
 }
 
 function update(){
   update_level();
-  update_player();
 }
 
 

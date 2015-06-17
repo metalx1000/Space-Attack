@@ -6,6 +6,9 @@ function preload_weapons(){
   //sounds
   game.load.audio('explosion1',['res/sounds/SFX_Explosion_05.wav']);
   game.load.audio('explosion2',['res/sounds/SFX_Explosion_07.wav']);
+
+  game.load.audio('laser1',['res/sounds/laser5.mp3']);
+  game.load.audio('laser2',['res/sounds/laser9.mp3']);
 }
 
 function create_weapons(){
@@ -21,14 +24,14 @@ function update_weapons(){
   playerBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
     if(game.time.now > bullet.life){
-      bullet.kill();
+      bullet.destroy();
     }
   });
 
   enemyBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
     if(game.time.now > bullet.life){
-      bullet.kill();
+      bullet.destroy();
     }
   });
 
@@ -38,7 +41,7 @@ function update_weapons(){
 }
 
 function shot(bullet,object){
-  //bullet.kill();
+  //bullet.destroy();
   if(bullet.type == "player-bullet"){
     explosion(object);
   }else if(bullet.type == "enemy-bullet"){
@@ -51,11 +54,14 @@ function shoot(object,speed,type){
   var y = object.position.y;
   
   if(type == "player-bullet"){
+    var laser_sfx = game.add.audio('laser2');
     var bullet = playerBullets.create(x,y,type);
   }else if(type == "enemy-bullet"){
+    var laser_sfx = game.add.audio('laser1');
     var bullet = enemyBullets.create(x,y,type);
   }
-  
+ 
+  laser_sfx.play();
   bullet.speed = speed;
   bullet.type = type;
   //bullet will die after 10 seconds
@@ -66,8 +72,6 @@ function explosion(object){
   //get object center and center explosion on it
   var x = object.position.x;
   var y = object.position.y;
-  object.kill();
-  object.alive = false;
   var explosion = game.add.sprite(x,y,'explosion');
   explosion.anchor.setTo(.5,.5);
 
@@ -76,6 +80,7 @@ function explosion(object){
     var explode_sfx = game.add.audio('explosion2');
   }else{
     var explode_sfx = game.add.audio('explosion1');
+    object.destroy();
   }
 
   explode_sfx.play();
@@ -84,5 +89,4 @@ function explosion(object){
   //add explosion animation
   explosion.animations.add('explode');
   explosion.animations.play('explode', 10, false);
-  explosion.killOnComplete = true;
 }

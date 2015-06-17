@@ -19,9 +19,13 @@ function update_enemy(){
   }   
 
   enemies.forEach(function(enemy){
-    if(game.time.now > enemy.shootTime && enemy.alive == true){
+    if(game.time.now > enemy.shootTime){
       shoot(enemy,10,"enemy-bullet");
       enemy.shootTime = game.time.now + Math.floor(Math.random() * enemy_wait1) + 1000;
+    }
+
+    if(enemy.position.y > game.world.height + 64){
+      enemy.destroy();
     }
   });
 }

@@ -13,12 +13,14 @@ function create() {
   create_level();
   create_player();
   create_enemy();
+  create_weapons();
 }
 
 function update(){
   update_level();
   update_player();
   update_enemy();
+  update_weapons();
 }
 
 

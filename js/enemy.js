@@ -14,6 +14,7 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
   }   
+
 }
 
 function new_enemy(){
@@ -30,6 +31,3 @@ function new_enemy(){
   enemy_timer = game.time.now + delay
 }
 
-function kill_enemy(enemy){
-  explosion(enemy);
-}

@@ -10,17 +10,7 @@ function create_player(){
   game.input.addPointer();
   players = game.add.group();
   players.enableBody = true;
-
-  //add ship image
-  player = players.create(game.width/2,game.height-128,'player');
-  //resize
-  player.scale.setTo(.5,.5);
-
-  //center of player to center of image
-  player.anchor.setTo(0.5,0.5);  
-  
-  //enable physics
-  game.physics.enable(player, Phaser.Physics.ARCADE);
+  new_player();
 }
 
 function update_player(){
@@ -37,7 +27,8 @@ function update_player(){
   }
 
   //shoot once on mouse click or touch screen press
-  if (game.input.mousePointer.isDown && click == 0||game.input.pointer1.isDown && click == 0){
+  if (game.input.mousePointer.isDown && click == 0 && player.alive == true
+  ||game.input.pointer1.isDown && click == 0 && player.alive == true){
     shoot(player,-5,"player-bullet");
     click = 1;
   }else if(game.input.mousePointer.isUp && game.input.pointer1.isUp){
@@ -46,9 +37,27 @@ function update_player(){
   }
 }
 
+function new_player(){
+
+  //add ship image
+  player = players.create(game.width/2,game.height-128,'player');
+  //resize
+  player.scale.setTo(.5,.5);
+
+  //center of player to center of image
+  player.anchor.setTo(0.5,0.5);  
+ 
+  player.alive = true;
+ 
+  //enable physics
+  game.physics.enable(player, Phaser.Physics.ARCADE);
+
+}
+
 function kill_player(player, enemy){
   //call explosions
   explosion(player);
+  player.alive = false;
   //check if enemy is a ship or bullet
   if(enemy.ship == true){
     explosion(enemy);
@@ -58,6 +67,6 @@ function kill_player(player, enemy){
 
   //wait before respawning player
   setTimeout(function(){
-    create_player();
+    new_player();
   },3000);
 }

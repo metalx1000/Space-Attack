@@ -30,7 +30,6 @@ function new_enemy(){
   enemy.scale.setTo(.5,.5);
   enemy.anchor.setTo(.5,.5);
   game.add.tween(enemy).to({y: game.world.height+256}, speed, "Linear", true);
-  enemy.alive = true;
   enemy.ship = true;
 
   //set random shoot time for enemy

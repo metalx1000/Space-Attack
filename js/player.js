@@ -8,9 +8,11 @@ function preload_player(){
 function create_player(){
   //add input for touch screen use
   game.input.addPointer();
+  players = game.add.group();
+  players.enableBody = true;
 
   //add ship image
-  player = game.add.sprite(game.width/2,game.height-128,'player');
+  player = players.create(game.width/2,game.height-128,'player');
   //resize
   player.scale.setTo(.5,.5);
 
@@ -47,7 +49,6 @@ function update_player(){
 function kill_player(player, enemy){
   //call explosions
   explosion(player);
-  
   //check if enemy is a ship or bullet
   if(enemy.ship == true){
     explosion(enemy);

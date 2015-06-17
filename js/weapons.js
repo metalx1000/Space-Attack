@@ -24,15 +24,15 @@ function update_weapons(){
 
   //if bullet hits something
   game.physics.arcade.overlap(playerBullets, enemies, shot, null, this);
-  game.physics.arcade.overlap(enemyBullets, player, shot, null, this);
+  game.physics.arcade.overlap(enemyBullets, players, shot, null, this);
 }
 
 function shot(bullet,object){
-  bullet.kill();
+  //bullet.kill();
   if(bullet.type == "player-bullet"){
     explosion(object);
   }else if(bullet.type == "enemy-bullet"){
-    kill_player();
+    kill_player(object,bullet);
   }
 }
 
@@ -55,6 +55,7 @@ function explosion(object){
   var x = object.position.x;
   var y = object.position.y;
   object.kill();
+  object.alive = false;
   var explosion = game.add.sprite(x,y,'explosion');
   explosion.anchor.setTo(.5,.5);
 

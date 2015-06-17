@@ -76,6 +76,7 @@ function explosion(object){
   //play sound depending on object type
   if(object.player){
     var explode_sfx = game.add.audio('explosion2');
+    object.kill();
   }else{
     var explode_sfx = game.add.audio('explosion1');
     object.destroy();

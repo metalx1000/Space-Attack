@@ -5,31 +5,47 @@ function preload_weapons(){
 }
 
 function create_weapons(){
-  bullets = game.add.group();
-  bullets.enableBody = true;
+  //create bullet groups and give them bodies for collision
+  playerBullets = game.add.group();
+  playerBullets.enableBody = true;
+  enemyBullets = game.add.group();
+  enemyBullets.enableBody = true;
 }
 
 function update_weapons(){
   //move bullets
-  bullets.forEach(function(bullet){
+  playerBullets.forEach(function(bullet){
+    bullet.position.y+=bullet.speed
+  });
+
+  enemyBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed
   });
 
   //if bullet hits something
-  game.physics.arcade.overlap(bullets, enemies, shot, null, this);
+  game.physics.arcade.overlap(playerBullets, enemies, shot, null, this);
+  game.physics.arcade.overlap(enemyBullets, player, shot, null, this);
 }
 
-function shot(bullet,enemy){
-  bullet.kill()
-  explosion(enemy);
+function shot(bullet,object){
+  bullet.kill();
+  if(bullet.type == "player-bullet"){
+    explosion(object);
+  }else if(bullet.type == "enemy-bullet"){
+    kill_player();
+  }
 }
 
 function shoot(object,speed,type){
   var x = object.position.x;
   var y = object.position.y;
   
-  var bullet = bullets.create(x,y,type);
-
+  if(type == "player-bullet"){
+    var bullet = playerBullets.create(x,y,type);
+  }else if(type == "enemy-bullet"){
+    var bullet = enemyBullets.create(x,y,type);
+  }
+  
   bullet.speed = speed;
   bullet.type = type;
 }

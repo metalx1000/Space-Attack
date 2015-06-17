@@ -14,6 +14,14 @@ function update_weapons(){
   bullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed
   });
+
+  //if bullet hits something
+  game.physics.arcade.overlap(bullets, enemies, shot, null, this);
+}
+
+function shot(bullet,enemy){
+  bullet.kill()
+  explosion(enemy);
 }
 
 function shoot(object,speed,type){

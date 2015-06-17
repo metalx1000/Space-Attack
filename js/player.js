@@ -6,6 +6,10 @@ function preload_player(){
 }
 
 function create_player(){
+  //add input for touch screen use
+  game.input.addPointer();
+
+  //add ship image
   player = game.add.sprite(game.width/2,game.height-128,'player');
   //resize
   player.scale.setTo(.5,.5);
@@ -30,11 +34,12 @@ function update_player(){
       player.body.velocity.setTo(0, 0);
   }
 
-  //shoot once on click
-  if (game.input.mousePointer.isDown && click == 0){
+  //shoot once on mouse click or touch screen press
+  if (game.input.mousePointer.isDown && click == 0||game.input.pointer1.isDown && click == 0){
     shoot(player,-5,"player-bullet");
     click = 1;
-  }else if(game.input.mousePointer.isUp){
+  }else if(game.input.mousePointer.isUp && game.input.pointer1.isUp){
+    //on triger release all for shooting again
     click = 0;
   }
 }

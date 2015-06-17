@@ -41,7 +41,7 @@ function update_weapons(){
 }
 
 function shot(bullet,object){
-  //bullet.destroy();
+  bullet.destroy();
   if(bullet.type == "player-bullet"){
     explosion(object);
   }else if(bullet.type == "enemy-bullet"){

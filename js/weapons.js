@@ -23,14 +23,14 @@ function update_weapons(){
   //move bullets
   playerBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
-    if(game.time.now > bullet.life){
+    if(bullet.position.y < 0 || bullet.position.y > game.world.height){
       bullet.destroy();
     }
   });
 
   enemyBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
-    if(game.time.now > bullet.life){
+    if(bullet.position.y < 0 || bullet.position.y > game.world.height){
       bullet.destroy();
     }
   });
@@ -64,8 +64,6 @@ function shoot(object,speed,type){
   laser_sfx.play();
   bullet.speed = speed;
   bullet.type = type;
-  //bullet will die after 10 seconds
-  bullet.life = game.time.now + 10000;
 }
 
 function explosion(object){

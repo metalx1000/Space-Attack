@@ -48,7 +48,7 @@ function new_player(){
   player.anchor.setTo(0.5,0.5);  
  
   player.alive = true;
- 
+  player.player = true; 
   //enable physics
   game.physics.enable(player, Phaser.Physics.ARCADE);
 

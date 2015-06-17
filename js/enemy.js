@@ -26,7 +26,7 @@ function update_enemy(){
 function new_enemy(){
   //set enemy speed between 5,000 and 10,000
   var speed = Math.floor(Math.random() * 10000) + 5000;
-  var enemy = enemies.create(game.world.randomX,-128,'enemy');
+  var enemy = enemies.create(game.world.randomX,-64,'enemy');
   enemy.scale.setTo(.5,.5);
   enemy.anchor.setTo(.5,.5);
   game.add.tween(enemy).to({y: game.world.height+256}, speed, "Linear", true);

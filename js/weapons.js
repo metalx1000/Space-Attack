@@ -17,6 +17,7 @@ function create_weapons(){
   playerBullets.enableBody = true;
   enemyBullets = game.add.group();
   enemyBullets.enableBody = true;
+  explosions = game.add.group();
 }
 
 function update_weapons(){
@@ -70,7 +71,7 @@ function explosion(object){
   //get object center and center explosion on it
   var x = object.position.x;
   var y = object.position.y;
-  var explosion = game.add.sprite(x,y,'explosion');
+  var explosion = explosions.create(x,y,'explosion');
   explosion.anchor.setTo(.5,.5);
 
   //play sound depending on object type
@@ -88,3 +89,4 @@ function explosion(object){
   explosion.animations.add('explode');
   explosion.animations.play('explode', 10, false);
 }
+

@@ -73,9 +73,6 @@ function enemy_death(object){
   if(enemies_killed%50 == 0){
     message("excellent");
     score+=100;
-
-    //clean up explosions
-    //explosions.destroy();
   }else if(enemies_killed%10 == 0){
     message("kill_bonus");
     score+=100;

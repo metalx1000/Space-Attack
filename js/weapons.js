@@ -36,6 +36,12 @@ function update_weapons(){
     }
   });
 
+  //remove explosions after timeout
+  explosions.forEach(function(explosion){
+    if(game.time.now > explosion.timeout){
+      explosion.destroy();
+    }
+  });
   //if bullet hits something
   game.physics.arcade.overlap(playerBullets, enemies, shot, null, this);
   game.physics.arcade.overlap(enemyBullets, players, shot, null, this);
@@ -74,6 +80,7 @@ function explosion(object){
   var explosion = explosions.create(x,y,'explosion');
   explosion.anchor.setTo(.5,.5);
 
+  explosion.timeout = game.time.now + 5000;
   //play sound depending on object type
   if(object.player){
     var explode_sfx = game.add.audio('explosion2');

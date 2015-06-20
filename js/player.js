@@ -69,4 +69,7 @@ function kill_player(player, enemy){
   setTimeout(function(){
     new_player();
   },3000);
+
+  //diplay death HUD message
+  message("player_death");
 }

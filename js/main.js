@@ -7,6 +7,7 @@ function preload() {
   preload_player();
   preload_enemy();
   preload_weapons();
+  preload_hud();
 }
 
 function create() {
@@ -14,6 +15,7 @@ function create() {
   create_player();
   create_enemy();
   create_weapons();
+  create_hud();
 }
 
 function update(){
@@ -21,6 +23,7 @@ function update(){
   update_player();
   update_enemy();
   update_weapons();
+  update_hud();
 }
 
 

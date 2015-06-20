@@ -1,6 +1,7 @@
 function preload_hud(){
   game.load.image('player_death','res/images/hud_player_death.png');
   game.load.image('kill_bonus','res/images/hud_kill_bonus.png');
+  game.load.image('excellent','res/images/hud_excellent.png');
 }
 
 function create_hud(){

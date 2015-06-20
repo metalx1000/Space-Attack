@@ -70,7 +70,10 @@ function enemy_death(object){
   explode_sfx.play();
   object.destroy();
   enemies_killed+=1;
-  if(enemies_killed%10 == 0){
+  if(enemies_killed%100 == 0){
+    message("excellent");
+    score+=100;
+  }else if(enemies_killed%10 == 0){
     message("kill_bonus");
     score+=100;
   }

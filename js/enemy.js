@@ -31,7 +31,15 @@ function update_enemy(){
 }
 
 function new_enemy(){
-  var enemy = enemies.create(game.world.randomX,-64,'enemy');
+  //set enemy position
+  //keep it from going off the side of the screen
+  var x = game.world.randomX;
+  if(x < 64){
+    x = 64;
+  }else if(x > game.width-64){
+    x = game.width-64;
+  }
+  var enemy = enemies.create(x,-64,'enemy');
   enemy.scale.setTo(.5,.5);
   enemy.anchor.setTo(.5,.5);
 

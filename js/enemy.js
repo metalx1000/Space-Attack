@@ -35,10 +35,9 @@ function new_enemy(){
   enemy.scale.setTo(.5,.5);
   enemy.anchor.setTo(.5,.5);
 
-  //set enemy speed between 2,000 and 5,000
-  //lower values makes the ship faster
-  enemy.speed = Math.floor(Math.random() * 5000) + 2000;
-  game.add.tween(enemy).to({y: game.world.height+256}, enemy.speed, "Linear", true);
+  //set enemy speed between 
+  enemy.speed = Math.floor(Math.random() * 300) + 100;
+  enemy.body.velocity.y = enemy.speed;
   enemy.ship = true;
 
   //set random shoot time for enemy

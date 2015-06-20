@@ -2,6 +2,7 @@ var enemy_timer;
 //set original delay for new enemy spawning
 var enemy_wait1 = 3000;
 var enemy_wait2 = 1000;
+var enemies_killed = 0;
 
 function preload_enemy(){
   game.load.image('enemy', 'res/sprites/alien_ship.png');
@@ -62,5 +63,18 @@ function new_enemy(){
 
   enemy_timer = game.time.now + delay
 
+}
+
+function enemy_death(object){
+  var explode_sfx = game.add.audio('explosion1');
+  explode_sfx.play();
+  object.destroy();
+  enemies_killed+=1;
+  if(enemies_killed%10 == 0){
+    message("kill_bonus");
+    score+=100;
+  }
+
+  score+=10;
 }
 

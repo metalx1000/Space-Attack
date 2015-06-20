@@ -76,13 +76,12 @@ function explosion(object){
   //play sound depending on object type
   if(object.player){
     var explode_sfx = game.add.audio('explosion2');
+    explode_sfx.play();
     object.kill();
   }else{
-    var explode_sfx = game.add.audio('explosion1');
-    object.destroy();
+    enemy_death(object);
   }
 
-  explode_sfx.play();
 
 
   //add explosion animation

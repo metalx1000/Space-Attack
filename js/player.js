@@ -1,4 +1,6 @@
 var player;
+var player_deaths = 0;
+var score = 0;
 var click = 0;
 
 function preload_player(){
@@ -55,6 +57,9 @@ function new_player(){
 }
 
 function kill_player(player, enemy){
+  //keep track of how many times player dies
+  player_deaths+=1;
+
   //call explosions
   explosion(player);
   player.alive = false;

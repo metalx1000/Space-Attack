@@ -11,10 +11,10 @@ function preload_enemy(){
 function create_enemy(){
   enemies = game.add.group();
   enemies.enableBody = true;    
-  new_enemy();
 }
 
 function update_enemy(){
+  if(typeof enemy_timer === 'undefined'){enemy_timer = game.time.now}
   if(game.time.now > enemy_timer){
     new_enemy();
   }   

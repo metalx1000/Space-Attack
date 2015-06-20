@@ -19,11 +19,15 @@ function create() {
 }
 
 function update(){
-  update_level();
-  update_player();
-  update_enemy();
-  update_weapons();
-  update_hud();
+  if (this.cache.isSoundDecoded('music')){
+    update_level();
+    update_player();
+    update_enemy();
+    update_weapons();
+    update_hud();
+  }else{
+    message('loading',100);
+  }
 }
 
 

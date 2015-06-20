@@ -49,7 +49,8 @@ function new_player(){
   //center of player to center of image
   player.anchor.setTo(0.5,0.5);  
  
-  player.alive = true;
+  //give player invincibility for 2 seconds after spawning
+  player.invincible = game.time.now + 2000;
   player.player = true; 
   //enable physics
   game.physics.enable(player, Phaser.Physics.ARCADE);
@@ -57,24 +58,27 @@ function new_player(){
 }
 
 function kill_player(player, enemy){
-  //keep track of how many times player dies
-  player_deaths+=1;
+  //if player is not invincible
+  if(game.time.now > player.invincible){
+    //keep track of how many times player dies
+    player_deaths+=1;
 
-  //call explosions
-  explosion(player);
-  player.alive = false;
-  //check if enemy is a ship or bullet
-  if(enemy.ship == true){
-    explosion(enemy);
-  }else{
-    enemy.kill();
+    //call explosions
+    explosion(player);
+    player.alive = false;
+    //check if enemy is a ship or bullet
+    if(enemy.ship == true){
+      explosion(enemy);
+    }else{
+      enemy.kill();
+    }
+
+    //wait before respawning player
+    setTimeout(function(){
+      new_player();
+    },3000);
+
+    //diplay death HUD message
+    message("player_death");
   }
-
-  //wait before respawning player
-  setTimeout(function(){
-    new_player();
-  },3000);
-
-  //diplay death HUD message
-  message("player_death");
 }

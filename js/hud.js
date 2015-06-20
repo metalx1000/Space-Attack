@@ -13,7 +13,7 @@ function create_hud(){
 }
 
 function update_hud(){
-  destroy_messages();
+  messages_timeout();
   textGroup.children[0].text="Score: " + score;
   textGroup.children[1].text="Kills: " + enemies_killed;
   textGroup.children[2].text="Deaths: " + player_deaths;
@@ -32,6 +32,12 @@ function message(msg){
 }
 
 function destroy_messages(){
+  msgs.forEach(function(msg){
+    msg.destroy();
+  });
+}
+
+function messages_timeout(){
   msgs.forEach(function(msg){
     if(game.time.now > msg.timeout){
       msg.destroy();

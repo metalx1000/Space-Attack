@@ -6,6 +6,7 @@ var enemies_killed = 0;
 
 function preload_enemy(){
   game.load.image('enemy', 'res/sprites/alien_ship.png');
+  game.load.image('enemy_blue', 'res/sprites/alien_ship_blue.png');
 }
 
 function create_enemy(){
@@ -17,6 +18,9 @@ function update_enemy(){
   if(typeof enemy_timer === 'undefined'){enemy_timer = game.time.now}
   if(game.time.now > enemy_timer){
     new_enemy();
+    if(game.time.now > 240000){
+      new_enemy("enemy_blue",3);
+    }
   }   
 
   enemies.forEach(function(enemy){
@@ -33,7 +37,7 @@ function update_enemy(){
 
 function new_enemy(type,life){
   if(typeof type === 'undefined'){type = "enemy"}
-  if(typeof life === 'undefined'){life = 3}
+  if(typeof life === 'undefined'){life = 1}
 
   //set enemy position
   //keep it from going off the side of the screen
@@ -52,6 +56,10 @@ function new_enemy(type,life){
 
   //set enemy speed between 
   enemy.speed = Math.floor(Math.random() * 300) + 100;
+  if(type == "enemy_blue"){
+    enemy.body.velocity.x = Math.floor(Math.random() * 30) + 10;
+  }
+
   enemy.body.velocity.y = enemy.speed;
   enemy.ship = true;
 

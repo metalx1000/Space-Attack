@@ -25,7 +25,8 @@ function update(){
     update_enemy();
     update_weapons();
     update_hud();
-  }else{
+  }else if(typeof load_msg === 'undefined'){
+    load_msg = true;
     message('loading',100);
   }
 }

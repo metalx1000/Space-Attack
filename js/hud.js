@@ -2,7 +2,8 @@ function preload_hud(){
   game.load.image('player_death','res/images/hud_player_death.png');
   game.load.image('kill_bonus','res/images/hud_kill_bonus.png');
   game.load.image('excellent','res/images/hud_excellent.png');
-  game.load.image('loading','res/images/hud_loading.png');
+
+  game.load.spritesheet('loading', 'res/sprites/hud_loading.png', 446, 81);
 }
 
 function create_hud(){
@@ -23,6 +24,7 @@ function update_hud(){
 function message(msg,timeout){
   //if timeout not set, default to 3 seconds
   if(typeof timeout === 'undefined'){timeout = 3000}
+  if(typeof animation === 'undefined'){animation = false}
   //destroy any exisiting messages
   destroy_messages();
 
@@ -30,6 +32,9 @@ function message(msg,timeout){
   msg = msgs.create(game.width/2,game.height/2,msg); 
   msg.anchor.setTo(.5,.5);
 
+  //if animation is true then animate it
+  msg.animations.add('ani');
+  msg.animations.play('ani', 3, true)
   //set timeout for msg
   msg.timeout = game.time.now + timeout;
 }

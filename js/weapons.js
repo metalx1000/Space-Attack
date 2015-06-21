@@ -6,6 +6,8 @@ function preload_weapons(){
   //sounds
   game.load.audio('explosion1',['res/sounds/SFX_Explosion_05.wav']);
   game.load.audio('explosion2',['res/sounds/SFX_Explosion_07.wav']);
+  game.load.audio('hit',['res/sounds/SFX_Powerup_08.wav']);
+
 
   game.load.audio('laser1',['res/sounds/laser5.mp3', 'res/sounds/laser5.ogg']);
   game.load.audio('laser2',['res/sounds/laser9.mp3', 'res/sounds/laser9.ogg']);
@@ -97,6 +99,10 @@ function hit(object){
   object.life-=1;
   if(object.life <= 0){
     enemy_death(object);
+  }else{
+    var hit_sfx = game.add.audio('hit');
+    hit_sfx.volume = 0.2;
+    hit_sfx.play();
   }
 }
 

@@ -97,6 +97,7 @@ function explosion(object,snd){
 
 function hit(object){
   object.life-=1;
+  score+=10;
   if(object.life <= 0){
     enemy_death(object);
   }else{

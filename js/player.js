@@ -20,7 +20,7 @@ function update_player(){
   game.physics.arcade.moveToPointer(player, 400);
   
   //if player and enemy collide kill player
-  game.physics.arcade.overlap(player, enemies, kill_player, null, this);
+  game.physics.arcade.overlap(player, enemies, hit_player, null, this);
 
   //stop movement when player reaches cursor
   if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
@@ -57,18 +57,19 @@ function new_player(){
 
 }
 
-function kill_player(player, enemy){
+function hit_player(player, enemy){
   //if player is not invincible
   if(game.time.now > player.invincible){
     //keep track of how many times player dies
     player_deaths+=1;
 
     //call explosions
-    explosion(player);
+    explosion(player, 'explosion2');
+    player.kill();
     player.alive = false;
     //check if enemy is a ship or bullet
     if(enemy.ship == true){
-      explosion(enemy);
+      enemy_death(enemy);
     }else{
       enemy.kill();
     }

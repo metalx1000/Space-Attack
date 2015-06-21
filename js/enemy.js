@@ -31,7 +31,10 @@ function update_enemy(){
   });
 }
 
-function new_enemy(){
+function new_enemy(type,life){
+  if(typeof type === 'undefined'){type = "enemy"}
+  if(typeof life === 'undefined'){life = 3}
+
   //set enemy position
   //keep it from going off the side of the screen
   var x = game.world.randomX;
@@ -40,9 +43,12 @@ function new_enemy(){
   }else if(x > game.width-64){
     x = game.width-64;
   }
-  var enemy = enemies.create(x,-64,'enemy');
+  var enemy = enemies.create(x,-64,type);
   enemy.scale.setTo(.5,.5);
   enemy.anchor.setTo(.5,.5);
+
+  //set number of hit need to kill
+  enemy.life = life;
 
   //set enemy speed between 
   enemy.speed = Math.floor(Math.random() * 300) + 100;
@@ -65,10 +71,9 @@ function new_enemy(){
 
 }
 
-function enemy_death(object){
-  var explode_sfx = game.add.audio('explosion1');
-  explode_sfx.play();
-  object.destroy();
+function enemy_death(enemy){
+  explosion(enemy);
+  enemy.destroy();
   enemies_killed+=1;
   if(enemies_killed%50 == 0){
     message("excellent");

@@ -50,9 +50,9 @@ function update_weapons(){
 function shot(bullet,object){
   bullet.kill();
   if(bullet.type == "player-bullet"){
-    explosion(object);
+    hit(object);
   }else if(bullet.type == "enemy-bullet"){
-    kill_player(object,bullet);
+    hit_player(object,bullet);
   }
 }
 
@@ -73,7 +73,13 @@ function shoot(object,speed,type){
   bullet.type = type;
 }
 
-function explosion(object){
+function explosion(object,snd){
+  if(typeof snd === 'undefined'){snd = 'explosion1'}
+
+  //play sound 
+  var explode_sfx = game.add.audio(snd);
+  explode_sfx.play();
+
   //get object center and center explosion on it
   var x = object.position.x;
   var y = object.position.y;
@@ -81,19 +87,18 @@ function explosion(object){
   explosion.anchor.setTo(.5,.5);
 
   explosion.timeout = game.time.now + 5000;
-  //play sound depending on object type
-  if(object.player){
-    var explode_sfx = game.add.audio('explosion2');
-    explode_sfx.play();
-    object.kill();
-  }else{
-    enemy_death(object);
-  }
-
-
 
   //add explosion animation
   explosion.animations.add('explode');
   explosion.animations.play('explode', 10, false);
 }
+
+function hit(object){
+  object.life-=1;
+  if(object.life <= 0){
+    enemy_death(object);
+  }
+}
+
+
 

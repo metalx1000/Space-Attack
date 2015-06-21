@@ -1,7 +1,7 @@
 function preload_level(){
   game.load.image('stars', 'res/images/stars.png');
 
-  game.load.audio('music', ['res/music/music1.ogg', 'res/music/music1.mp3']);
+  game.load.audio('music', [ 'res/music/music1.wav', 'res/music/music1.ogg', 'res/music/music1.mp3']);
 }
 
 function create_level(){

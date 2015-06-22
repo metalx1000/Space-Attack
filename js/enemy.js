@@ -21,8 +21,10 @@ function update_enemy(){
   if(typeof enemy_timer === 'undefined'){enemy_timer = game.time.now}
   if(game.time.now > enemy_timer){
     new_enemy();
-    if(game.time.now > 240000){
-      new_enemy("enemy_blue",3);
+    if(game.time.now > 240000 && level == 0){
+      level = 1;
+      new_enemy('boss_red',100,5,game.width/2,-512);
+      //new_enemy("enemy_blue",3);
     }
   }   
 

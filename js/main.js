@@ -1,6 +1,7 @@
 var game = new Phaser.Game(720, 1280, Phaser.AUTO, 'phaser', { preload: preload, create: create, update: update});
 var centerx = game.width / 2;
 var centery = game.height / 2;
+var level = 0;
 
 function preload() {
   preload_level();

@@ -51,15 +51,14 @@ function update_weapons(){
 
 function shot(bullet,object){
   if(object.boss && bullet.dead != true){
-    console.log("boss hit");
     bullet.dead = true;
     object.life-=1;
+    hit(object);
   }else if(!object.boss){
-    console.log("bullet kill");
     bullet.kill();
   }
 
-  if(bullet.type == "player-bullet"){
+  if(bullet.type == "player-bullet" && bullet.dead != true){
     hit(object);
   }else if(bullet.type == "enemy-bullet"){
     hit_player(object,bullet);

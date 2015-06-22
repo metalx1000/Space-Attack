@@ -154,6 +154,7 @@ function boss_destroy(boss){
     //  music.destroy();
     music.fadeIn(4000); 
   }
+  
 }
 
 function boss_update(boss){

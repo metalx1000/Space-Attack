@@ -3,14 +3,6 @@ function preload_weapons(){
   game.load.image('player-bullet','res/sprites/bullet.png');
   game.load.image('enemy-bullet','res/sprites/enemy-bullet.png');
 
-  //sounds
-  game.load.audio('explosion1',['res/sounds/SFX_Explosion_05.wav']);
-  game.load.audio('explosion2',['res/sounds/SFX_Explosion_07.wav']);
-  game.load.audio('hit',['res/sounds/SFX_Powerup_08.wav']);
-
-
-  game.load.audio('laser1',['res/sounds/laser5.mp3', 'res/sounds/laser5.ogg']);
-  game.load.audio('laser2',['res/sounds/laser9.mp3', 'res/sounds/laser9.ogg']);
 }
 
 function create_weapons(){

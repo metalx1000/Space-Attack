@@ -20,7 +20,9 @@ function create() {
 }
 
 function update(){
-  if (this.cache.isSoundDecoded('music')){
+  //wait for larger files to finish loading before starting game
+  if (this.cache.isSoundDecoded('music')
+  && this.cache.isSoundDecoded('music_boss')){
     update_level();
     update_player();
     update_enemy();

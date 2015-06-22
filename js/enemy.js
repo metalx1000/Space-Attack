@@ -27,7 +27,7 @@ function update_enemy(){
   }   
 
   enemies.forEach(function(enemy){
-    if(game.time.now > enemy.shootTime){
+    if(game.time.now > enemy.shootTime && !enemy.boss){
       shoot(enemy,10,"enemy-bullet");
       enemy.shootTime = game.time.now + Math.floor(Math.random() * enemy_wait1) + 1000;
     }
@@ -123,5 +123,10 @@ function boss_update(boss){
   }else if(boss.position.x < 100){
     boss.body.velocity.x = 100;
   }
- 
+  if(game.time.now > boss.shootTime){
+    shoot(boss,10,"enemy-bullet",5);
+    boss.shootTime = game.time.now + Math.floor(Math.random() * enemy_wait1) + 1000;
+  }
+
+
 }

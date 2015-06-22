@@ -58,7 +58,8 @@ function shot(bullet,object){
   }
 }
 
-function shoot(object,speed,type){
+function shoot(object,speed,type,size){
+  if(typeof size === 'undefined'){size = 1}
   var x = object.position.x;
   var y = object.position.y;
   
@@ -70,6 +71,7 @@ function shoot(object,speed,type){
     var bullet = enemyBullets.create(x,y,type);
   }
  
+  bullet.scale.setTo(size,size);
   laser_sfx.play();
   bullet.speed = speed;
   bullet.type = type;

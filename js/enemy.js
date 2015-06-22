@@ -22,12 +22,12 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
     //wait for minutes into game then bring out first boss
-    if(game.time.now > 240000 && level == 0){
+    if(game.time.now > 24000 && level == 0){
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
     }
     //add blue enemies after first boss destroyed
-    if(level > 0){
+    if(level > 1){
       new_enemy("enemy_blue",3);
     }
   }   
@@ -84,6 +84,12 @@ function new_enemy(type,life,size,x,y){
 
   if(type.indexOf("boss")>=0){
     enemy.boss = true;
+    music.fadeOut(4000);
+    //  Play some boss music
+    music_boss = game.add.audio('music_boss');
+    music_boss.fadeIn(4000);
+    music_boss.loop = true;
+
   };
 
   //set random shoot time for enemy
@@ -124,7 +130,8 @@ function enemy_death(enemy){
 function boss_death(boss){
   explosion(boss,undefined,5);
   game.time.events.add(2000, boss_destroy,boss);
-  
+ 
+  music_boss.fadeOut(1000);
   for(var i = 0;i<15;i++){
     var size = Math.floor(Math.random() * 4) + 1;
     var x = game.world.randomX;
@@ -132,11 +139,21 @@ function boss_death(boss){
 
     game.time.events.add(100 * i, explosion, undefined,undefined,undefined,size,x,y);
   }
-  level+=1
+
+  level+=1 //move to next level
+  //slow enemy attacks for a little
+  enemy_wait1 = 4000;
+  enemy_wait2 = 2000;
 }
 
 function boss_destroy(boss){
   this.destroy();
+
+  if(!music.isPlaying){
+    music_boss.destroy();
+    //  music.destroy();
+    music.fadeIn(4000); 
+  }
 }
 
 function boss_update(boss){

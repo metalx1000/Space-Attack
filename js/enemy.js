@@ -7,6 +7,9 @@ var enemies_killed = 0;
 function preload_enemy(){
   game.load.image('enemy', 'res/sprites/alien_ship.png');
   game.load.image('enemy_blue', 'res/sprites/alien_ship_blue.png');
+  game.load.image('enemy_green', 'res/sprites/alien_ship_green.png');
+
+  game.load.image('boss_red', 'res/sprites/boss_red.png');
 }
 
 function create_enemy(){
@@ -32,23 +35,39 @@ function update_enemy(){
     if(enemy.position.y > game.world.height + 64){
       enemy.destroy();
     }
+
+    if(enemy.boss && enemy.position.y > 0){
+      enemy.body.velocity.y = 0;
+      enemy.body.velocity.x = 100;
+      if(enemy.position.x > game.width - 100){
+        enemy.body.velocity.x = -100;
+      }else if(enemy.position.x < 100){
+        enemy.body.velocity.x = 100;
+      }
+        
+    }
   });
 }
 
-function new_enemy(type,life){
+function new_enemy(type,life,size,x,y){
   if(typeof type === 'undefined'){type = "enemy"}
   if(typeof life === 'undefined'){life = 1}
+  if(typeof size === 'undefined'){size = .5}
+  if(typeof y === 'undefined'){y = -64}
 
-  //set enemy position
-  //keep it from going off the side of the screen
-  var x = game.world.randomX;
-  if(x < 64){
-    x = 64;
-  }else if(x > game.width-64){
-    x = game.width-64;
+  if(typeof posx === 'undefined'){
+    //set enemy position
+    //keep it from going off the side of the screen
+    var x = game.world.randomX;
+    if(x < 64){
+      x = 64;
+    }else if(x > game.width-64){
+      x = game.width-64;
+    }
   }
-  var enemy = enemies.create(x,-64,type);
-  enemy.scale.setTo(.5,.5);
+
+  var enemy = enemies.create(x,y,type);
+  enemy.scale.setTo(size,size);
   enemy.anchor.setTo(.5,.5);
 
   //set number of hit need to kill
@@ -62,6 +81,10 @@ function new_enemy(type,life){
 
   enemy.body.velocity.y = enemy.speed;
   enemy.ship = true;
+
+  if(type.indexOf("boss")>=0){
+    enemy.boss = true;
+  };
 
   //set random shoot time for enemy
   enemy.shootTime = game.time.now + Math.floor(Math.random() * 3000) + 1000;

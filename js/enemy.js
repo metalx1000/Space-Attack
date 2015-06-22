@@ -65,7 +65,7 @@ function new_enemy(type,life,size,x,y){
   var enemy = enemies.create(x,y,type);
   enemy.scale.setTo(size,size);
   enemy.anchor.setTo(.5,.5);
-
+  enemy.alive = true;
   //set number of hit need to kill
   enemy.life = life;
 
@@ -99,18 +99,39 @@ function new_enemy(type,life,size,x,y){
 }
 
 function enemy_death(enemy){
-  explosion(enemy);
-  enemy.destroy();
-  enemies_killed+=1;
-  if(enemies_killed%50 == 0){
-    message("excellent");
-    score+=100;
-  }else if(enemies_killed%10 == 0){
-    message("kill_bonus");
-    score+=100;
-  }
+  if(enemy.boss){
+    boss_death(enemy);
+  }else{
+    explosion(enemy);
+    enemy.destroy();
+    enemies_killed+=1;
+    if(enemies_killed%50 == 0){
+      message("excellent");
+      score+=100;
+    }else if(enemies_killed%10 == 0){
+      message("kill_bonus");
+      score+=100;
+    }
 
-  score+=10;
+    score+=10;
+  }
+}
+
+function boss_death(boss){
+  explosion(boss,undefined,5);
+  game.time.events.add(2000, boss_destroy,boss);
+  
+  for(var i = 0;i<15;i++){
+    var size = Math.floor(Math.random() * 4) + 1;
+    var x = game.world.randomX;
+    var y = game.world.randomY/4;
+
+    game.time.events.add(100 * i, explosion, undefined,undefined,undefined,size,x,y);
+  }
+}
+
+function boss_destroy(boss){
+  this.destroy();
 }
 
 function boss_update(boss){

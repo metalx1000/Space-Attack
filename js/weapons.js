@@ -90,18 +90,22 @@ function shoot(object,speed,type,size){
   bullet.type = type;
 }
 
-function explosion(object,snd){
+function explosion(object,snd,size,x,y){
   if(typeof snd === 'undefined'){snd = 'explosion1'}
+  if(typeof size === 'undefined'){size = 1}
 
   //play sound 
   var explode_sfx = game.add.audio(snd);
   explode_sfx.play();
 
   //get object center and center explosion on it
-  var x = object.position.x;
-  var y = object.position.y;
+  if(typeof object !== 'undefined'){
+    var x = object.position.x;
+    var y = object.position.y;
+  }
   var explosion = explosions.create(x,y,'explosion');
   explosion.anchor.setTo(.5,.5);
+  explosion.scale.setTo(size,size);
 
   explosion.timeout = game.time.now + 5000;
 

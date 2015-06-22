@@ -50,7 +50,15 @@ function update_weapons(){
 }
 
 function shot(bullet,object){
-  bullet.kill();
+  if(object.boss && bullet.dead != true){
+    console.log("boss hit");
+    bullet.dead = true;
+    object.life-=1;
+  }else if(!object.boss){
+    console.log("bullet kill");
+    bullet.kill();
+  }
+
   if(bullet.type == "player-bullet"){
     hit(object);
   }else if(bullet.type == "enemy-bullet"){
@@ -98,7 +106,9 @@ function explosion(object,snd){
 }
 
 function hit(object){
-  object.life-=1;
+  if(!object.boss){
+    object.life-=1; 
+  }
   score+=10;
   if(object.life <= 0){
     enemy_death(object);

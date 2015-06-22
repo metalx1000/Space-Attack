@@ -9,6 +9,7 @@ function preload() {
   preload_enemy();
   preload_weapons();
   preload_hud();
+  preload_sounds();
 }
 
 function create() {

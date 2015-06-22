@@ -5,6 +5,7 @@ var enemy_wait2 = 1000;
 var enemies_killed = 0;
 
 function preload_enemy(){
+  //sprites
   game.load.image('enemy', 'res/sprites/alien_ship.png');
   game.load.image('enemy_blue', 'res/sprites/alien_ship_blue.png');
   game.load.image('enemy_green', 'res/sprites/alien_ship_green.png');
@@ -154,7 +155,15 @@ function boss_destroy(boss){
     //  music.destroy();
     music.fadeIn(4000); 
   }
-  
+
+  var s = 0;
+  var points = setInterval(function(){
+    s+=1
+    score+=10;
+    var point = game.add.audio("coin10");
+    point.play();
+    if(s == 25){clearInterval(points)};
+  },200,s);  
 }
 
 function boss_update(boss){

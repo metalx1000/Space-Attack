@@ -36,16 +36,10 @@ function update_enemy(){
       enemy.destroy();
     }
 
-    if(enemy.boss && enemy.position.y > 0){
-      enemy.body.velocity.y = 0;
-      enemy.body.velocity.x = 100;
-      if(enemy.position.x > game.width - 100){
-        enemy.body.velocity.x = -100;
-      }else if(enemy.position.x < 100){
-        enemy.body.velocity.x = 100;
-      }
-        
+    if(enemy.boss){
+      boss_update(enemy);       
     }
+    
   });
 }
 
@@ -117,3 +111,17 @@ function enemy_death(enemy){
   score+=10;
 }
 
+function boss_update(boss){
+  if(boss.position.y > 0){
+      boss.body.velocity.y = 0;
+      boss.position.y = 0
+      boss.body.velocity.x = 100;
+  }
+
+  if(boss.position.x > game.width - 100){
+    boss.body.velocity.x = -100;
+  }else if(boss.position.x < 100){
+    boss.body.velocity.x = 100;
+  }
+ 
+}

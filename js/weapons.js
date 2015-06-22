@@ -54,6 +54,12 @@ function shot(bullet,object){
     bullet.dead = true;
     object.life-=1;
     hit(object);
+    var delay = Math.floor(Math.random() * 400) + 200;
+    setTimeout(function(){
+      explosion(bullet);
+      bullet.kill();
+    },delay);
+
   }else if(!object.boss){
     bullet.kill();
   }

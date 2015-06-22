@@ -68,8 +68,10 @@ function hit_player(player, enemy){
     player.kill();
     player.alive = false;
     //check if enemy is a ship or bullet
-    if(enemy.ship == true){
+    if(enemy.ship && !enemy.boss){
       enemy_death(enemy);
+    }else if(enemy.boss){
+      //boss and player collide
     }else{
       enemy.kill();
     }

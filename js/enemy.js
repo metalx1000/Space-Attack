@@ -21,10 +21,14 @@ function update_enemy(){
   if(typeof enemy_timer === 'undefined'){enemy_timer = game.time.now}
   if(game.time.now > enemy_timer){
     new_enemy();
+    //wait for minutes into game then bring out first boss
     if(game.time.now > 240000 && level == 0){
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
-      //new_enemy("enemy_blue",3);
+    }
+    //add blue enemies after first boss destroyed
+    if(level > 0){
+      new_enemy("enemy_blue",3);
     }
   }   
 
@@ -128,6 +132,7 @@ function boss_death(boss){
 
     game.time.events.add(100 * i, explosion, undefined,undefined,undefined,size,x,y);
   }
+  level+=1
 }
 
 function boss_destroy(boss){

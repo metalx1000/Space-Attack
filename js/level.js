@@ -1,3 +1,4 @@
+var levelTime;
 function preload_level(){
   game.load.image('stars', 'res/images/stars.png');
 
@@ -7,6 +8,7 @@ function preload_level(){
 
 function create_level(){
   stars = game.add.tileSprite(0, 0, game.width, game.height, 'stars');
+  levelTime = game.time.now + 240000;
 
   //  Play some music
   music = game.add.audio('music');

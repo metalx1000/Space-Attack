@@ -5,8 +5,6 @@ var level = 0;
 
 function preload() {
   preload_level();
-  preload_player();
-  preload_enemy();
   preload_weapons();
   preload_hud();
   preload_sounds();

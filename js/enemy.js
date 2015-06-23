@@ -4,15 +4,6 @@ var enemy_wait1 = 3000;
 var enemy_wait2 = 1000;
 var enemies_killed = 0;
 
-function preload_enemy(){
-  //sprites
-  game.load.image('enemy', 'res/sprites/alien_ship.png');
-  game.load.image('enemy_blue', 'res/sprites/alien_ship_blue.png');
-  game.load.image('enemy_green', 'res/sprites/alien_ship_green.png');
-
-  game.load.image('boss_red', 'res/sprites/boss_red.png');
-}
-
 function create_enemy(){
   enemies = game.add.group();
   enemies.enableBody = true;    
@@ -23,13 +14,18 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
     //wait for minutes into game then bring out first boss
-    if(game.time.now > 240000 && level == 0){
+    if(level == 0 && game.time.now > levelTime){
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
     }
     //add blue enemies after first boss destroyed
     if(level > 1){
       new_enemy("enemy_blue",3);
+    }
+
+    if(level == 2 && game.time.now > levelTime){
+      level = 3;
+      new_enemy('boss_blue',100,5,game.width/2,-512);
     }
   }   
 
@@ -149,7 +145,7 @@ function boss_death(boss){
 
 function boss_destroy(boss){
   this.destroy();
-
+  levelTime = game.time.now + 240000;
   if(!music.isPlaying){
     music_boss.destroy();
     //  music.destroy();
@@ -161,6 +157,7 @@ function boss_destroy(boss){
     s+=1
     score+=10;
     var point = game.add.audio("coin10");
+    point.volume = .2;
     point.play();
     if(s == 25){clearInterval(points)};
   },200,s);  

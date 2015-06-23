@@ -3,10 +3,6 @@ var player_deaths = 0;
 var score = 0;
 var click = 0;
 
-function preload_player(){
-  game.load.image('player','res/sprites/ship.png');
-}
-
 function create_player(){
   //add input for touch screen use
   game.input.addPointer();

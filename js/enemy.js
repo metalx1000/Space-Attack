@@ -78,7 +78,7 @@ function new_enemy(type,life,size,x,y){
 
   enemy.body.velocity.y = enemy.speed;
   enemy.ship = true;
-
+   
   if(type.indexOf("boss")>=0){
     enemy.boss = true;
     music.fadeOut(4000);
@@ -106,7 +106,9 @@ function new_enemy(type,life,size,x,y){
 }
 
 function enemy_death(enemy){
-  if(enemy.boss){
+  if(enemy.boss && enemy.life == 0){
+    levelTime = game.time.now + 240000;
+    enemy.life = -1;
     boss_death(enemy);
   }else{
     explosion(enemy);
@@ -145,7 +147,6 @@ function boss_death(boss){
 
 function boss_destroy(boss){
   this.destroy();
-  levelTime = game.time.now + 240000;
   if(!music.isPlaying){
     music_boss.destroy();
     //  music.destroy();

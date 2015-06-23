@@ -1,12 +1,8 @@
 function preload_sounds(){
   //sounds
-  game.load.audio('explosion1',['res/sounds/SFX_Explosion_05.wav']);
-  game.load.audio('explosion2',['res/sounds/SFX_Explosion_07.wav']);
-  game.load.audio('coin10',['res/sounds/coin10.wav']);
-  game.load.audio('hit',['res/sounds/SFX_Powerup_08.wav']);
-
-
-  game.load.audio('laser1',['res/sounds/laser5.mp3', 'res/sounds/laser5.ogg']);
-  game.load.audio('laser2',['res/sounds/laser9.mp3', 'res/sounds/laser9.ogg']);
-
+  var sounds = ["coin10","explosion1","explosion2","hit","laser1","laser2"];
+  sounds.forEach(function(snd){
+    console.log(snd);
+    game.load.audio(snd,['res/sounds/'+snd+'.wav','res/sounds/'+snd+'.ogg','res/sounds/'+snd+'.mp3']);
+  });
 }

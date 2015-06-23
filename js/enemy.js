@@ -23,7 +23,7 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
     //wait for minutes into game then bring out first boss
-    if(game.time.now > 24000 && level == 0){
+    if(game.time.now > 240000 && level == 0){
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
     }

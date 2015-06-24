@@ -10,13 +10,21 @@ function preload_sounds(){
     "boss_blue",
     "boss_red",
     "bullet",
+    "coin",
+    "diagonal_gun",
     "enemy_blue",
     "enemy-bullet",
     "enemy_green",
     "enemy",
     "explode",
     "hud_loading",
-    "player"
+    "life_up",
+    "missile2",
+    "missile",
+    "player",
+    "repair",
+    "straight_gun",
+    "wingman"
   ];
 
   sprites.forEach(function(sprite){

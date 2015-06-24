@@ -10,6 +10,10 @@ function update_powerup(){
   if(level < 3 && game.time.now > power_delay){
     new_powerup("missile2");   
   }
+
+  //if player collects powerup
+  game.physics.arcade.overlap(powerups, player, collect_powerup, null, this);
+
 }
 
 function new_powerup(type){
@@ -37,5 +41,16 @@ function new_powerup(type){
 }
 
 function kill_powerup(powerup){
-  powerup.destroy();
+  powerup.kill();
+}
+
+function collect_powerup(player,powerup){
+  if(powerup.type == "missile2"){
+    enemies.forEach(function(enemy){
+      var i = Math.floor(Math.random() * 300) + 100;
+      game.time.events.add(i , enemy_death, this, enemy);
+    });
+  }
+
+  kill_powerup(powerup);
 }

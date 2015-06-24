@@ -47,8 +47,10 @@ function kill_powerup(powerup){
 function collect_powerup(player,powerup){
   if(powerup.type == "missile2"){
     enemies.forEach(function(enemy){
-      var i = Math.floor(Math.random() * 300) + 100;
-      game.time.events.add(i , enemy_death, this, enemy);
+      if(!enemy.boss){
+        var i = Math.floor(Math.random() * 300) + 100;
+        game.time.events.add(i , enemy_death, this, enemy);
+      }
     });
   }
 

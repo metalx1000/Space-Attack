@@ -1,13 +1,13 @@
 var power_delay;
 
 function create_powerup(){
-  power_delay = game.time.now + 60000 * 20;
+  power_delay = game.time.now + 60000 * 2;
   powerups = game.add.group();
   powerups.enableBody = true;
 }
 
 function update_powerup(){
-  if(level < 3 && game.time.now > power_delay){
+  if(game.time.now > power_delay){
     new_powerup("missile2");   
   }
 

@@ -16,6 +16,7 @@ function create() {
   create_enemy();
   create_weapons();
   create_hud();
+  create_powerup();
 }
 
 function update(){
@@ -27,6 +28,7 @@ function update(){
     update_enemy();
     update_weapons();
     update_hud();
+    update_powerup();
   }else if(typeof load_msg === 'undefined'){
     load_msg = true;
     message('loading',100);

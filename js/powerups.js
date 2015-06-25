@@ -4,11 +4,13 @@ function create_powerup(){
   power_delay = game.time.now + 60000 * 1;
   powerups = game.add.group();
   powerups.enableBody = true;
+  powerup_list = ["missle2","wingman"];
 }
 
 function update_powerup(){
   if(game.time.now > power_delay){
-    new_powerup("missile2");   
+    var powerup = powerup_list[Math.floor(Math.random()*powerup_list.length)];
+    new_powerup(powerup);   
   }
 
   //if player collects powerup
@@ -56,6 +58,8 @@ function collect_powerup(player,powerup){
         game.time.events.add(i , enemy_death, this, enemy);
       }
     });
+  }else if(powerup.type == "wingman"){
+    mother_ship();
   }
 
   kill_powerup(powerup);
@@ -73,4 +77,56 @@ function bonus_points(amount){
     if(s >= amount){clearInterval(points)};
   },100,s);
 
+}
+
+function mother_ship(){
+  var mother = game.add.sprite(game.width/2,game.height+512,"player");
+  mother.anchor.setTo(.5,.5);
+  mother.scale.setTo(5,5);
+
+  //shoot position
+  mother.sx = 10;
+
+  //bring ship onto screen
+  var tween = game.add.tween(mother);
+  tween.to({ y: game.height }, 2000);
+  tween.onComplete.add(mother_attack,this,mother);
+  tween.start();
+
+  //animate random left/right movements
+  mother.tween = setInterval(function(){  
+    var tween = game.add.tween(mother);
+    var x = game.width/2 + (Math.floor(Math.random() * 200) -200) + 100;
+    tween.to({ x: x}, 500, Phaser.Easing.Linear.None);
+    tween.start();
+  },500);
+
+  //move ship off screen
+  setTimeout(function(mother){
+    clearInterval(mother.tween);
+    var tween = game.add.tween(mother);
+    tween.to({ y: game.height + 512 }, 2000);
+    tween.start();
+    tween.onComplete.add(function(mother){
+      mother.destroy();
+    },this,mother);
+  },10000,mother);
+
+}
+
+function mother_attack(mother){
+  var y = game.height - 256;
+  
+  var s = setInterval(function(mother,y){
+    mother.sx +=50
+    x = mother.sx;
+    if(x > game.width){
+      mother.sx = 10;
+    }  
+    shoot(undefined,-5,"player-bullet",2,x,y);
+  },100,mother,y);
+
+  setTimeout(function(){
+    clearInterval(s);
+  },5000);
 }

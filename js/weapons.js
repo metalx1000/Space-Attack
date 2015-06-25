@@ -63,10 +63,10 @@ function shot(bullet,object){
   }
 }
 
-function shoot(object,speed,type,size){
+function shoot(object,speed,type,size,x,y){
   if(typeof size === 'undefined'){size = 1}
-  var x = object.position.x;
-  var y = object.position.y;
+  if(typeof x === 'undefined'){ x = object.position.x;}
+  if(typeof y === 'undefined'){ y = object.position.y;}
   
   if(type == "player-bullet"){
     var laser_sfx = game.add.audio('laser2');

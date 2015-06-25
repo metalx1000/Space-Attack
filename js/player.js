@@ -82,7 +82,7 @@ function hit_player(player, enemy){
   }
 }
 
-function player_invincible(player,set,time){
+function player_invincible(player,set,time,msg){
   if(set == true){
     player.invincible = true;
     player.loadTexture('player_invincible');
@@ -90,6 +90,13 @@ function player_invincible(player,set,time){
   }else{
     player.invincible = false;
     player.loadTexture('player');    
+  }
+
+  //display message on powerup
+  if(msg == true){
+    var snd = game.add.audio('invincibility');
+    snd.play();
+    message("hud_invincibility");
   }
   
 }

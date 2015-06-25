@@ -4,7 +4,7 @@ function create_powerup(){
   power_delay = game.time.now + 60000 * 1;
   powerups = game.add.group();
   powerups.enableBody = true;
-  powerup_list = ["missile2","wingman"];
+  powerup_list = ["missile2","wingman","invincibility"];
 }
 
 function update_powerup(){
@@ -60,6 +60,8 @@ function collect_powerup(player,powerup){
     });
   }else if(powerup.type == "wingman"){
     mother_ship();
+  }else if(powerup.type == "invincibility"){
+    player_invincible(player,true,10,true);
   }
 
   kill_powerup(powerup);

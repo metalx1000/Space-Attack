@@ -117,10 +117,10 @@ function enemy_death(enemy){
     enemies_killed+=1;
     if(enemies_killed%50 == 0){
       message("excellent");
-      score+=100;
+      bonus_points(25);
     }else if(enemies_killed%10 == 0){
       message("kill_bonus");
-      score+=100;
+      bonus_points(10);
     }
 
     score+=10;
@@ -154,15 +154,7 @@ function boss_destroy(boss){
     music.fadeIn(4000); 
   }
 
-  var s = 0;
-  var points = setInterval(function(){
-    s+=1
-    score+=10;
-    var point = game.add.audio("coin10");
-    point.volume = .2;
-    point.play();
-    if(s == 25){clearInterval(points)};
-  },200,s);  
+  bonus_points(50);
 }
 
 function boss_update(boss){

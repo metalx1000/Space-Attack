@@ -47,6 +47,9 @@ function kill_powerup(powerup){
 function collect_powerup(player,powerup){
   if(powerup.type == "missile2"){
     message("mega1");
+    var snd = game.add.audio("mega1");
+    snd.play();
+    bonus_points(20);
     enemies.forEach(function(enemy){
       if(!enemy.boss){
         var i = Math.floor(Math.random() * 300) + 100;
@@ -56,4 +59,18 @@ function collect_powerup(player,powerup){
   }
 
   kill_powerup(powerup);
+}
+
+function bonus_points(amount){
+  if(typeof amount === 'undefined'){amount = 20}
+  var s = 0;
+  var points = setInterval(function(){
+    s+=1
+    score+=10;
+    var point = game.add.audio("coin10");
+    point.volume = .2;
+    point.play();
+    if(s >= amount){clearInterval(points)};
+  },100,s);
+
 }

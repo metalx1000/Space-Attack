@@ -59,6 +59,8 @@ function collect_powerup(player,powerup){
       }
     });
   }else if(powerup.type == "wingman"){
+    var snd = game.add.audio(powerup.type);
+    snd.play();
     mother_ship();
   }else if(powerup.type == "invincibility"){
     player_invincible(player,true,10,true);

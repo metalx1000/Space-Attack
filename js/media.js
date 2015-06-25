@@ -22,6 +22,7 @@ function preload_sounds(){
     "missile2",
     "missile",
     "player",
+    "player_invincible",
     "repair",
     "straight_gun",
     "wingman"

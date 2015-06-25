@@ -46,7 +46,7 @@ function new_player(){
   player.anchor.setTo(0.5,0.5);  
  
   //give player invincibility for 2 seconds after spawning
-  player.invincible = game.time.now + 2000;
+  player_invincible(player,true,2)
   player.player = true; 
   //enable physics
   game.physics.enable(player, Phaser.Physics.ARCADE);
@@ -55,7 +55,7 @@ function new_player(){
 
 function hit_player(player, enemy){
   //if player is not invincible
-  if(game.time.now > player.invincible){
+  if(!player.invincible){
     //keep track of how many times player dies
     player_deaths+=1;
 
@@ -80,4 +80,16 @@ function hit_player(player, enemy){
     //diplay death HUD message
     message("player_death");
   }
+}
+
+function player_invincible(player,set,time){
+  if(set == true){
+    player.invincible = true;
+    player.loadTexture('player_invincible');
+    game.time.events.add(time * 1000, player_invincible, this, player,false);
+  }else{
+    player.invincible = false;
+    player.loadTexture('player');    
+  }
+  
 }

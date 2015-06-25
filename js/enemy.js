@@ -90,7 +90,8 @@ function new_enemy(type,life,size,x,y){
   };
 
   //set random shoot time for enemy
-  enemy.shootTime = game.time.now + Math.floor(Math.random() * 3000) + 1000;
+  enemy.shootTime = game.time.now + Math.floor(Math.random() * enemy_wait1) + 1000;
+
   //set delay for next enemy between 1 and 3 seconds
   //And speed up as time goes on
   var delay = Math.floor(Math.random() * enemy_wait1) + enemy_wait2

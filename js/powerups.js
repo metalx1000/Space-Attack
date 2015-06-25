@@ -46,6 +46,7 @@ function kill_powerup(powerup){
 
 function collect_powerup(player,powerup){
   if(powerup.type == "missile2"){
+    message("mega1");
     enemies.forEach(function(enemy){
       if(!enemy.boss){
         var i = Math.floor(Math.random() * 300) + 100;

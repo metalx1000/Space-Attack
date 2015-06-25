@@ -1,7 +1,7 @@
 var power_delay;
 
 function create_powerup(){
-  power_delay = game.time.now + 60000 * 2;
+  power_delay = game.time.now + 60000 * 1;
   powerups = game.add.group();
   powerups.enableBody = true;
 }
@@ -17,8 +17,8 @@ function update_powerup(){
 }
 
 function new_powerup(type){
-  var i = Math.floor(Math.random() * 2) + 1;
-  power_delay = game.time.now + 60000 * i;
+  var i = Math.floor(Math.random() * 60000) + 10000;
+  power_delay = game.time.now + i;
   var y = game.world.randomY / 2;
   var vely = 100;
   if(i == 1){

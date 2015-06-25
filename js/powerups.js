@@ -4,7 +4,7 @@ function create_powerup(){
   power_delay = game.time.now + 60000 * 1;
   powerups = game.add.group();
   powerups.enableBody = true;
-  powerup_list = ["missle2","wingman"];
+  powerup_list = ["missile2","wingman"];
 }
 
 function update_powerup(){
@@ -80,6 +80,7 @@ function bonus_points(amount){
 }
 
 function mother_ship(){
+  message("hud_mother_ship");
   var mother = game.add.sprite(game.width/2,game.height+512,"player");
   mother.anchor.setTo(.5,.5);
   mother.scale.setTo(5,5);
@@ -128,5 +129,6 @@ function mother_attack(mother){
 
   setTimeout(function(){
     clearInterval(s);
+    bonus_points(20); 
   },5000);
 }

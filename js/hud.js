@@ -3,6 +3,7 @@ function preload_hud(){
   game.load.image('kill_bonus','res/images/hud_kill_bonus.png');
   game.load.image('excellent','res/images/hud_excellent.png');
   game.load.image('mega1','res/images/hud_mega1.png');
+  game.load.image('hud_mother_ship','res/images/hud_mother_ship.png');
 
   game.load.spritesheet('loading', 'res/sprites/hud_loading.png', 446, 81);
 }

@@ -27,8 +27,15 @@ function update_player(){
   //shoot once on mouse click or touch screen press
   if (game.input.mousePointer.isDown && click == 0 && player.alive == true
   ||game.input.pointer1.isDown && click == 0 && player.alive == true){
-    shoot(player,-5,"player-bullet");
-    click = 1;
+    if(player.weapon == "diagonal_gun"){
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,20);
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
+      shoot(player,-5,"player-bullet");
+      click = 1;
+    }else{
+      shoot(player,-5,"player-bullet");
+      click = 1;
+    }
   }else if(game.input.mousePointer.isUp && game.input.pointer1.isUp){
     //on triger release all for shooting again
     click = 0;

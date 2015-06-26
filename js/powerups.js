@@ -4,7 +4,7 @@ function create_powerup(){
   power_delay = game.time.now + 60000 * 1;
   powerups = game.add.group();
   powerups.enableBody = true;
-  powerup_list = ["missile2","wingman","invincibility"];
+  powerup_list = ["missile2","wingman","invincibility","diagonal_gun"];
 }
 
 function update_powerup(){
@@ -65,6 +65,12 @@ function collect_powerup(player,powerup){
     mother_ship();
   }else if(powerup.type == "invincibility"){
     player_invincible(player,true,10,true);
+  }else if(powerup.type == "diagonal_gun"){
+    player.weapon = "diagonal_gun";
+    message("hud_diagonal_gun");
+    var snd = game.add.audio("powerup");
+    snd.play();
+
   }
 
   kill_powerup(powerup);

@@ -5,6 +5,7 @@ function preload_hud(){
   game.load.image('mega1','res/images/hud_mega1.png');
   game.load.image('hud_mother_ship','res/images/hud_mother_ship.png');
   game.load.image('hud_invincibility','res/images/hud_invincibility.png');
+  game.load.image('hud_diagonal_gun','res/images/hud_diagonal_gun.png');
 
   game.load.spritesheet('loading', 'res/sprites/hud_loading.png', 446, 81);
 }

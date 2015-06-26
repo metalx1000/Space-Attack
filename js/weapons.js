@@ -63,10 +63,11 @@ function shot(bullet,object){
   }
 }
 
-function shoot(object,speed,type,size,x,y){
+function shoot(object,speed,type,size,x,y,velx){
   if(typeof size === 'undefined'){size = 1}
   if(typeof x === 'undefined'){ x = object.position.x;}
   if(typeof y === 'undefined'){ y = object.position.y;}
+  if(typeof velx === 'undefined'){ velx = 0;}
   
   if(type == "player-bullet"){
     var laser_sfx = game.add.audio('laser2');
@@ -80,6 +81,7 @@ function shoot(object,speed,type,size,x,y){
   laser_sfx.play();
   bullet.speed = speed;
   bullet.type = type;
+  bullet.body.velocity.x = velx;
 }
 
 function explosion(object,snd,size,x,y){

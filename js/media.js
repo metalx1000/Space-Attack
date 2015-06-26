@@ -27,7 +27,9 @@ function preload_sounds(){
     "repair",
     "straight_gun",
     "invincibility",
-    "wingman"
+    "wingman",
+    "wingman2",
+    "wingman3"
   ];
 
   sprites.forEach(function(sprite){

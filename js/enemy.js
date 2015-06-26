@@ -14,19 +14,29 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
     //wait for minutes into game then bring out first boss
-    if(level == 0 && game.time.now > levelTime){
+    if(level == 0 && enemies_killed == 100){
+      console.log("red");
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
+    }else if(level == 2 && enemies_killed == 200){
+      level = 3;
+      console.log("blue");
+      new_enemy('boss_blue',125,5,game.width/2,-512);
+    }else if(level == 4 && enemies_killed == 300){
+      level = 5;
+      console.log("greem");
+      new_enemy('boss_green',150,5,game.width/2,-512);
     }
+
     //add blue enemies after first boss destroyed
     if(level > 1){
       new_enemy("enemy_blue",3);
     }
 
-    if(level == 2 && game.time.now > levelTime){
-      level = 3;
-      new_enemy('boss_blue',100,5,game.width/2,-512);
+    if(level > 5){
+      new_enemy("enemy_green",3);
     }
+ 
   }   
 
   enemies.forEach(function(enemy){
@@ -74,6 +84,19 @@ function new_enemy(type,life,size,x,y){
   enemy.speed = Math.floor(Math.random() * 300) + 100;
   if(type == "enemy_blue"){
     enemy.body.velocity.x = Math.floor(Math.random() * 30) + 10;
+  }else if(type == "enemy_green"){
+    enemy.position.y = game.world.randomY / 2;
+    var i = Math.floor(Math.random() * 2);
+    var velx = Math.floor(Math.random() * 50) + 10;
+    enemy.speed = 10;
+    if(i == 1){
+      enemy.position.x = game.width;
+      enemy.body.velocity.x = -velx;
+    }else{
+      enemy.position.x = 0;
+      enemy.body.velocity.x = velx;
+    }
+
   }
 
   enemy.body.velocity.y = enemy.speed;

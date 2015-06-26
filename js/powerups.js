@@ -19,11 +19,12 @@ function update_powerup(){
 }
 
 function new_powerup(type){
-  var i = Math.floor(Math.random() * 60000) + 10000;
+  var i = Math.floor(Math.random() * 30000) + 10000;
   power_delay = game.time.now + i;
   var y = game.world.randomY / 2;
   var vely = 100;
-  if(i == 1){
+  var x = Math.floor(Math.random() * 2);
+  if(x == 1){
     var x = game.width;
     var velx = -30;
   }else{

@@ -9,6 +9,7 @@ function preload_sounds(){
   var sprites = [
     "boss_blue",
     "boss_red",
+    "boss_green",
     "bullet",
     "coin",
     "diagonal_gun",

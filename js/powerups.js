@@ -1,9 +1,10 @@
 var power_delay;
 
 function create_powerup(){
-  power_delay = game.time.now + 60000 * 1;
+  power_delay = game.time.now + 15000;
   powerups = game.add.group();
   powerups.enableBody = true;
+  wingmen = game.add.group();
   powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun"];
 }
 
@@ -16,10 +17,19 @@ function update_powerup(){
   //if player collects powerup
   game.physics.arcade.overlap(powerups, player, collect_powerup, null, this);
 
+  wingmen.forEach(function(wingman){
+    if(game.time.now > wingman.shootTime){
+      wingman.shootTime += 300;
+      wingman_shoot(wingman);
+    }
+    if(game.time.now > wingman.deathTime){
+      wingman.destroy();
+    }
+  });
 }
 
 function new_powerup(type){
-  var i = Math.floor(Math.random() * 15000) + 50000;
+  var i = Math.floor(Math.random() * 15000) + 5000;
   power_delay = game.time.now + i;
   var y = game.world.randomY / 2;
   var vely = 100;
@@ -152,14 +162,13 @@ function wingman_backup(type,size){
   if(typeof type === 'undefined'){type = 'player'}
   if(typeof size === 'undefined'){size = .5}
   for(var i = 128;i<game.width;i+=128){
-    var wingman = game.add.sprite(i,game.height + 256,type);
+    var wingman = wingmen.create(i,game.height + 256,type);
     wingman.anchor.setTo(.5,.5);
     wingman.scale.setTo(size,size);
     game.physics.enable(wingman, Phaser.Physics.ARCADE);
     wingman.body.velocity.y = -300;
-    var timer = game.time.events.loop(300, wingman_shoot, this,wingman);
-    //game.time.events.add(4000, timer.destroy, this);
-    game.time.events.add(5000, wingman_destroy, this,wingman,timer.timer);
+    wingman.deathTime = game.time.now + 5000;
+    wingman.shootTime = game.time.now + 300;
   } 
 }
 
@@ -169,7 +178,3 @@ function wingman_shoot(wingman){
   shoot(wingman,-2,"player-bullet",undefined,undefined,undefined,-20);
 }
 
-function wingman_destroy(wingman,timer){
-  wingman.destroy();
-  timer.destroy();
-}

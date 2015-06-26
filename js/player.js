@@ -40,6 +40,10 @@ function update_player(){
     //on triger release all for shooting again
     click = 0;
   }
+
+  if(game.time.now > player.invinTime){
+    player_invincible(player,false);
+  }
 }
 
 function new_player(){
@@ -92,8 +96,8 @@ function hit_player(player, enemy){
 function player_invincible(player,set,time,msg){
   if(set == true){
     player.invincible = true;
+    player.invinTime = game.time.now + time * 1000;
     player.loadTexture('player_invincible');
-    game.time.events.add(time * 1000, player_invincible, this, player,false);
   }else{
     player.invincible = false;
     player.loadTexture('player');    

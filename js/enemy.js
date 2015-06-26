@@ -14,17 +14,14 @@ function update_enemy(){
   if(game.time.now > enemy_timer){
     new_enemy();
     //wait for minutes into game then bring out first boss
-    if(level == 0 && enemies_killed == 100){
-      console.log("red");
+    if(level == 0 && enemies_killed >= 100){
       level = 1;
       new_enemy('boss_red',100,5,game.width/2,-512);
-    }else if(level == 2 && enemies_killed == 200){
+    }else if(level == 2 && enemies_killed >= 200){
       level = 3;
-      console.log("blue");
       new_enemy('boss_blue',125,5,game.width/2,-512);
-    }else if(level == 4 && enemies_killed == 300){
+    }else if(level == 4 && enemies_killed >= 300){
       level = 5;
-      console.log("greem");
       new_enemy('boss_green',150,5,game.width/2,-512);
     }
 
@@ -33,7 +30,7 @@ function update_enemy(){
       new_enemy("enemy_blue",3);
     }
 
-    if(level > 5){
+    if(level > 3){
       new_enemy("enemy_green",3);
     }
  

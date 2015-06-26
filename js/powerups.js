@@ -91,7 +91,7 @@ function mother_ship(){
   mother.scale.setTo(5,5);
 
   //shoot position
-  mother.sx = 10;
+  mother.sx = -40;
 
   //bring ship onto screen
   var tween = game.add.tween(mother);
@@ -124,10 +124,10 @@ function mother_attack(mother){
   var y = game.height - 256;
   
   var s = setInterval(function(mother,y){
-    mother.sx +=50
+    mother.sx +=50;
     x = mother.sx;
     if(x > game.width){
-      mother.sx = 10;
+      mother.sx = -40;
     }  
     shoot(undefined,-5,"player-bullet",2,x,y);
   },100,mother,y);

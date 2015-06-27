@@ -5,7 +5,7 @@ function create_powerup(){
   powerups = game.add.group();
   powerups.enableBody = true;
   wingmen = game.add.group();
-  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun"];
+  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","straight_gun"];
 }
 
 function update_powerup(){
@@ -85,6 +85,11 @@ function collect_powerup(player,powerup){
     var snd = game.add.audio("powerup");    
     snd.play();
     wingman_backup();
+  }else if(powerup.type == "straight_gun"){
+    message("hud_" + powerup.type);
+    var snd = game.add.audio(powerup.type);
+    snd.play();
+    straight_gun();
   }
 
   kill_powerup(powerup);
@@ -178,3 +183,13 @@ function wingman_shoot(wingman){
   shoot(wingman,-2,"player-bullet",undefined,undefined,undefined,-20);
 }
 
+function straight_gun(){
+  var i = 0;
+  var timer = setInterval(function(){
+    shoot(player,-5,"player-bullet");
+    i++;
+    if(i >= 100){
+      clearInterval(timer);
+    }
+  },100,i,timer);
+}

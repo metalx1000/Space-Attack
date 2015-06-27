@@ -1,6 +1,6 @@
 function preload_sounds(){
   //sounds
-  var sounds = ["coin10","explosion1","explosion2","hit","laser1","laser2","mega1","invincibility","wingman","powerup","straight_gun"];
+  var sounds = ["coin10","explosion1","explosion2","hit","laser1","laser2","mega1","invincibility","wingman","powerup","rapid_fire"];
   sounds.forEach(function(snd){
     game.load.audio(snd,['res/sounds/'+snd+'.wav','res/sounds/'+snd+'.ogg','res/sounds/'+snd+'.mp3']);
   });
@@ -25,7 +25,7 @@ function preload_sounds(){
     "player",
     "player_invincible",
     "repair",
-    "straight_gun",
+    "rapid_fire",
     "invincibility",
     "wingman",
     "wingman2",

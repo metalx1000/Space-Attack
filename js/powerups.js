@@ -186,6 +186,10 @@ function wingman_shoot(wingman){
 function rapid_fire(){
   var i = 0;
   var timer = setInterval(function(){
+    if(!player.alive){
+      i=100;
+    }
+
     shoot(player,-5,"player-bullet");
     i++;
     if(i >= 100){

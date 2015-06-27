@@ -16,13 +16,13 @@ function update_enemy(){
     //wait for minutes into game then bring out first boss
     if(level == 0 && enemies_killed >= 100){
       level = 1;
-      new_enemy('boss_red',100,5,game.width/2,-512);
+      new_enemy('boss_red',200,5,game.width/2,-512);
     }else if(level == 2 && enemies_killed >= 200){
       level = 3;
-      new_enemy('boss_blue',125,5,game.width/2,-512);
+      new_enemy('boss_blue',300,5,game.width/2,-512);
     }else if(level == 4 && enemies_killed >= 300){
       level = 5;
-      new_enemy('boss_green',150,5,game.width/2,-512);
+      new_enemy('boss_green',400,5,game.width/2,-512);
     }
 
     //add blue enemies after first boss destroyed

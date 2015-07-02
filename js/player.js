@@ -51,10 +51,17 @@ function player_shoot(){
     shoot(player,-5,"player-bullet");
     click = 1;
   }else if(player.weapon == "diagonal_gun2"){
+    player.plasma = true;
     shoot(player,-5,"player-bullet",undefined,undefined,undefined,20); 
     shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20); 
     shoot(player,5,"player-bullet",undefined,undefined,undefined,20); 
     shoot(player,5,"player-bullet",undefined,undefined,undefined,-20); 
+  }else if(player.weapon == "diagonal_gun3"){
+    player.plasma = true;
+    shoot(player,-5,"player-bullet",undefined,undefined,undefined,0); 
+    shoot(player,0,"player-bullet",undefined,undefined,undefined,-200); 
+    shoot(player,0,"player-bullet",undefined,undefined,undefined,200); 
+    shoot(player,5,"player-bullet",undefined,undefined,undefined,0); 
   }else{
     shoot(player,-5,"player-bullet");
     click = 1;

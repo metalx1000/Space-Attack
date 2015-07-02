@@ -5,7 +5,8 @@ function create_powerup(){
   powerups = game.add.group();
   powerups.enableBody = true;
   wingmen = game.add.group();
-  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire","powerUpPlus","diagonal_gun2"];
+  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire",
+    "powerUpPlus","diagonal_gun2", "diagonal_gun3"];
 }
 
 function update_powerup(){
@@ -81,6 +82,13 @@ function collect_powerup(player,powerup){
     snd.play();
   }else if(powerup.type == "diagonal_gun2"){
     player.weapon = "diagonal_gun2";
+    player.plasma = true;
+    message("hud_diagonal_gun");
+    var snd = game.add.audio("powerup");
+    snd.play();
+  }else if(powerup.type == "diagonal_gun3"){
+    player.weapon = "diagonal_gun3";
+    player.plasma = true;
     message("hud_diagonal_gun");
     var snd = game.add.audio("powerup");
     snd.play();

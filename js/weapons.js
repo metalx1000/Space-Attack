@@ -71,7 +71,7 @@ function shoot(object,speed,type,size,x,y,velx){
 
   if(type == "player-bullet"){
     var laser_sfx = game.add.audio('laser2');
-    if(player.weapon == "diagonal_gun2"){
+    if(player.plasma){
       bulletType = "plasmaShot";
     }else{
       bulletType = type;

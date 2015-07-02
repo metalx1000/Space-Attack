@@ -19,6 +19,7 @@ function preload_sounds(){
     "coin",
     "diagonal_gun",
     "diagonal_gun2",
+    "diagonal_gun3",
     "enemy_blue",
     "enemy-bullet",
     "enemy_green",

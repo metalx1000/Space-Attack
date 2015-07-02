@@ -63,6 +63,7 @@ function player_shoot(){
     shoot(player,0,"player-bullet",undefined,undefined,undefined,200); 
     shoot(player,5,"player-bullet",undefined,undefined,undefined,0); 
   }else{
+    player.plasma = false;
     shoot(player,-5,"player-bullet");
     click = 1;
   }

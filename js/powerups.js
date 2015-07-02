@@ -5,13 +5,12 @@ function create_powerup(){
   powerups = game.add.group();
   powerups.enableBody = true;
   wingmen = game.add.group();
-  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire"];
+  powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire","powerUpPlus"];
 }
 
 function update_powerup(){
   if(game.time.now > power_delay){
-    var powerup = powerup_list[Math.floor(Math.random()*powerup_list.length)];
-    new_powerup(powerup);   
+    randomPowerUp(); 
   }
 
   //if player collects powerup
@@ -32,14 +31,14 @@ function new_powerup(type){
   var i = Math.floor(Math.random() * 15000) + 5000;
   power_delay = game.time.now + i;
   var y = game.world.randomY / 2;
-  var vely = 100;
+  var vely = Math.floor(Math.random() * 100) + 150;
   var x = Math.floor(Math.random() * 2);
   if(x == 1){
     var x = game.width;
-    var velx = -30;
+    var velx = (Math.floor(Math.random() * 30) + 50) * -1;
   }else{
     var x = 0;
-    var velx = 30;
+    var velx = Math.floor(Math.random() * 30) + 50;
   }
 
   var powerup = powerups.create(x,y,type);
@@ -90,9 +89,20 @@ function collect_powerup(player,powerup){
     var snd = game.add.audio(powerup.type);
     snd.play();
     rapid_fire();
+  }else if(powerup.type == "powerUpPlus"){
+    var snd = game.add.audio("powerup");    
+    snd.play();
+    for(var i=0;i<3;i++){
+      randomPowerUp();
+    }
   }
 
   kill_powerup(powerup);
+}
+
+function randomPowerUp(){
+  var powerup = powerup_list[Math.floor(Math.random()*powerup_list.length)];
+  new_powerup(powerup);   
 }
 
 function bonus_points(amount){

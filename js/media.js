@@ -10,6 +10,7 @@ function preload_sounds(){
 
   //sprites
   var sprites = [
+    "powerUpPlus",
     "boss_blue",
     "boss_red",
     "boss_green",

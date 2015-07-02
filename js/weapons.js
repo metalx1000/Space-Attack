@@ -63,23 +63,19 @@ function shot(bullet,object){
   }
 }
 
-function shoot(object,speed,type,size,x,y,velx){
+function shoot(object,speed,type,size,x,y,velx,bulletType){
   if(typeof size === 'undefined'){size = 1}
   if(typeof x === 'undefined'){ x = object.position.x;}
   if(typeof y === 'undefined'){ y = object.position.y;}
   if(typeof velx === 'undefined'){ velx = 0;}
-
+  if(typeof bulletType === 'undefined'){ bulletType = type;}
+  
   if(type == "player-bullet"){
     var laser_sfx = game.add.audio('laser2');
-    if(player.plasma){
-      bulletType = "plasmaShot";
-    }else{
-      bulletType = type;
-    }
     var bullet = playerBullets.create(x,y,bulletType);
   }else if(type == "enemy-bullet"){
     var laser_sfx = game.add.audio('laser1');
-    var bullet = enemyBullets.create(x,y,type);
+    var bullet = enemyBullets.create(x,y,bulletType);
   }
  
   bullet.anchor.setTo(.5,.5);

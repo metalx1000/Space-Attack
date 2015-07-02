@@ -18,14 +18,16 @@ function update_weapons(){
   //move bullets
   playerBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
-    if(bullet.position.y < 0 || bullet.position.y > game.world.height){
+    if(bullet.position.y < 0 || bullet.position.y > game.world.height
+      ||game.time.now > bullet.timeout){
       bullet.destroy();
     }
   });
 
   enemyBullets.forEach(function(bullet){
     bullet.position.y+=bullet.speed;
-    if(bullet.position.y < 0 || bullet.position.y > game.world.height){
+    if(bullet.position.y < 0 || bullet.position.y > game.world.height
+      ||game.time.now > bullet.timeout){
       bullet.destroy();
     }
   });
@@ -84,6 +86,7 @@ function shoot(object,speed,type,size,x,y,velx,bulletType){
   bullet.speed = speed;
   bullet.type = type;
   bullet.body.velocity.x = velx;
+  bullet.timeout = game.time.now + 5000;
 }
 
 function explosion(object,snd,size,x,y){

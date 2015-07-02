@@ -22,6 +22,9 @@ function update_enemy(){
       new_enemy('boss_blue',300,5,game.width/2,-512);
     }else if(level == 4 && enemies_killed >= 300){
       level = 5;
+      //slow enemy attacks for a little
+      enemy_wait1 = 4000;
+      enemy_wait2 = 2000;
       new_enemy('boss_green',400,5,game.width/2,-512);
     }
 

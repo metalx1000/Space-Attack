@@ -16,7 +16,9 @@ function update_player(){
   //if player and enemy collide kill player
   game.physics.arcade.overlap(player, enemies, hit_player, null, this);
 
-
+  if(!player.alive && game.time.now > player.spawnTime){
+    new_player();
+  }
   if(game.time.now > player.invinTime){
     player_invincible(player,false);
   }
@@ -88,9 +90,7 @@ function hit_player(player, enemy){
     }
 
     //wait before respawning player
-    setTimeout(function(){
-      new_player();
-    },3000);
+    player.spawnTime = game.time.now + 2000;
 
     //diplay death HUD message
     message("player_death");

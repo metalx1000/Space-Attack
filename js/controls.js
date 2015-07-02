@@ -14,7 +14,7 @@ function create_controls(){
 
 function update_controls(){
   //follow cursor if no gamepad
-  if(!pad1Active){
+  if(!pad1.connected){
     game.physics.arcade.moveToPointer(player, 400);
     
     //stop movement when player reaches cursor
@@ -23,13 +23,12 @@ function update_controls(){
         player.body.velocity.setTo(0, 0);
     }
 
-  }
-
-  mouseControls();
-  checkGamepad();  
-  if(pad1.connected){
+    mouseControls();
+    pad1Active = false;
+  }else{
     update_gamepad(); 
   }
+  checkGamepad();  
 }
 
 function checkGamepad(){
@@ -48,7 +47,6 @@ function checkGamepad(){
     },2000)
   }
   
-  //mouse controls
 }
 
 function mouseControls(){

@@ -1,6 +1,6 @@
 var player;
 var player_deaths = 0;
-var gamepadSpeed = 200;
+var gamepadSpeed = 400;
 var score = 0;
 var click = 0;
 
@@ -14,8 +14,6 @@ function update_player(){
 
   //if player and enemy collide kill player
   game.physics.arcade.overlap(player, enemies, hit_player, null, this);
-
-  player_shot();
 
 
   if(game.time.now > player.invinTime){
@@ -42,27 +40,17 @@ function new_player(){
 }
 
 function player_shoot(){
-  //shoot once on mouse click or touch screen press or gamepad button
-  if (game.input.mousePointer.isDown && click == 0 && player.alive
-  ||game.input.pointer1.isDown && click == 0 && player.alive
-  ||pad1._buttons[0].isDown && click == 0 && player.alive
-  ||pad1._rawPad.buttons[3].pressed && click == 0 && player.alive){
-    if(player.weapon == "diagonal_gun"){
-      shoot(player,-5,"player-bullet",undefined,undefined,undefined,20);
-      shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
-      shoot(player,-5,"player-bullet");
-      click = 1;
-    }else{
-      shoot(player,-5,"player-bullet");
-      click = 1;
-    }
-  }else if(game.input.mousePointer.isUp
-  && game.input.pointer1.isUp
-  && !pad1._rawPad.buttons[3].pressed
-  && pad1._buttons[0].isUp){
-    //on triger release all for shooting again
-    click = 0;
+
+  if(player.weapon == "diagonal_gun"){
+    shoot(player,-5,"player-bullet",undefined,undefined,undefined,20);
+    shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
+    shoot(player,-5,"player-bullet");
+    click = 1;
+  }else{
+    shoot(player,-5,"player-bullet");
+    click = 1;
   }
+
 
 }
 

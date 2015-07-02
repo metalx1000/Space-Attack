@@ -23,6 +23,7 @@ function update_controls(){
 
   }
 
+  mouseControls();
   checkGamepad();  
   update_gamepad(); 
 }
@@ -42,6 +43,24 @@ function checkGamepad(){
       message("hud_mouse_disabled",3000);
     },2000)
   }
+  
+  //mouse controls
+}
+
+function mouseControls(){
+  //shoot once on mouse click or touch screen press or gamepad button
+  if (game.input.mousePointer.isDown && click == 0 && player.alive
+  ||game.input.pointer1.isDown && click == 0 && player.alive){
+    click = 1;
+    player_shoot();
+  }else if(game.input.mousePointer.isUp
+  && game.input.pointer1.isUp
+  &&!pad1._rawPad.buttons[3].pressed
+  && pad1._buttons[0].isUp){
+    //on triger release all for shooting again
+    click = 0;
+  }
+  
 }
 
 function update_gamepad(){
@@ -71,6 +90,17 @@ function update_gamepad(){
     player.body.velocity.y = 0;
   }
   
-
+  //shoot once on mouse click or touch screen press or gamepad button
+  if (pad1._buttons[0].isDown && click == 0 && player.alive
+  ||pad1._rawPad.buttons[3].pressed && click == 0 && player.alive){
+    click = 1;
+    player_shoot();
+  }else if(game.input.mousePointer.isUp
+  && game.input.pointer1.isUp
+  &&!pad1._rawPad.buttons[3].pressed
+  && pad1._buttons[0].isUp){
+    //on triger release all for shooting again
+    click = 0;
+  }
 }
 

@@ -4,25 +4,18 @@ var score = 0;
 var click = 0;
 
 function create_player(){
-  //add input for touch screen use
-  game.input.addPointer();
+
   players = game.add.group();
   players.enableBody = true;
   new_player();
 }
 
 function update_player(){
-  //follow cursor  
-  game.physics.arcade.moveToPointer(player, 400);
-  
+
   //if player and enemy collide kill player
   game.physics.arcade.overlap(player, enemies, hit_player, null, this);
 
-  //stop movement when player reaches cursor
-  if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
-  {
-      player.body.velocity.setTo(0, 0);
-  }
+
 
   //shoot once on mouse click or touch screen press
   if (game.input.mousePointer.isDown && click == 0 && player.alive == true

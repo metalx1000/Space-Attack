@@ -7,6 +7,7 @@ var click = 0;
 function create_player(){
   players = game.add.group();
   players.enableBody = true;
+  
   new_player();
 }
 
@@ -25,6 +26,9 @@ function new_player(){
 
   //add ship image
   player = players.create(game.width/2,game.height-128,'player');
+  
+  //stop player from going off screen
+  player.body.collideWorldBounds = true;
   //resize
   player.scale.setTo(.5,.5);
 

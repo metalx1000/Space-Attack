@@ -71,12 +71,18 @@ function shoot(object,speed,type,size,x,y,velx){
 
   if(type == "player-bullet"){
     var laser_sfx = game.add.audio('laser2');
-    var bullet = playerBullets.create(x,y,type);
+    if(player.weapon == "diagonal_gun2"){
+      bulletType = "plasmaShot";
+    }else{
+      bulletType = type;
+    }
+    var bullet = playerBullets.create(x,y,bulletType);
   }else if(type == "enemy-bullet"){
     var laser_sfx = game.add.audio('laser1');
     var bullet = enemyBullets.create(x,y,type);
   }
  
+  bullet.anchor.setTo(.5,.5);
   bullet.scale.setTo(size,size);
   laser_sfx.play();
   bullet.speed = speed;

@@ -50,6 +50,11 @@ function player_shoot(){
     shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
     shoot(player,-5,"player-bullet");
     click = 1;
+  }else if(player.weapon == "diagonal_gun2"){
+    shoot(player,-5,"player-bullet",undefined,undefined,undefined,20); 
+    shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20); 
+    shoot(player,5,"player-bullet",undefined,undefined,undefined,20); 
+    shoot(player,5,"player-bullet",undefined,undefined,undefined,-20); 
   }else{
     shoot(player,-5,"player-bullet");
     click = 1;

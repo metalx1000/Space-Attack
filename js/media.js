@@ -10,6 +10,7 @@ function preload_sounds(){
 
   //sprites
   var sprites = [
+    "plasmaShot",
     "powerUpPlus",
     "boss_blue",
     "boss_red",
@@ -17,6 +18,7 @@ function preload_sounds(){
     "bullet",
     "coin",
     "diagonal_gun",
+    "diagonal_gun2",
     "enemy_blue",
     "enemy-bullet",
     "enemy_green",

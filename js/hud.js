@@ -8,6 +8,8 @@ function preload_hud(){
   game.load.image('hud_diagonal_gun','res/images/hud_diagonal_gun.png');
   game.load.image('hud_wingman2','res/images/hud_wingman2.png');
   game.load.image('hud_rapid_fire','res/images/hud_rapid_fire.png');
+  game.load.image('hud_gamepad','res/images/hud_gamepad.png');
+  game.load.image('hud_mouse_disabled','res/images/hud_mouse_disabled.png');
 
   game.load.spritesheet('loading', 'res/sprites/hud_loading.png', 446, 81);
 }

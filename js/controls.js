@@ -1,5 +1,7 @@
 var pad1;
 var pad1Active = false;
+var padClick = false;
+var padButton = 1;
 
 function create_controls(){
   //add input for touch screen use
@@ -25,7 +27,9 @@ function update_controls(){
 
   mouseControls();
   checkGamepad();  
-  update_gamepad(); 
+  if(pad1.connected){
+    update_gamepad(); 
+  }
 }
 
 function checkGamepad(){
@@ -54,9 +58,7 @@ function mouseControls(){
     click = 1;
     player_shoot();
   }else if(game.input.mousePointer.isUp
-  && game.input.pointer1.isUp
-  &&!pad1._rawPad.buttons[3].pressed
-  && pad1._buttons[0].isUp){
+  && game.input.pointer1.isUp){
     //on triger release all for shooting again
     click = 0;
   }
@@ -90,17 +92,18 @@ function update_gamepad(){
     player.body.velocity.y = 0;
   }
   
-  //shoot once on mouse click or touch screen press or gamepad button
-  if (pad1._buttons[0].isDown && click == 0 && player.alive
-  ||pad1._rawPad.buttons[3].pressed && click == 0 && player.alive){
-    click = 1;
-    player_shoot();
-  }else if(game.input.mousePointer.isUp
-  && game.input.pointer1.isUp
-  &&!pad1._rawPad.buttons[3].pressed
-  && pad1._buttons[0].isUp){
-    //on triger release all for shooting again
-    click = 0;
+  //shoot once on any gamepad button
+  for(var i = 0;i<6;i++){
+    if (pad1._buttons[i].isDown && !padClick && player.alive
+    ||pad1._rawPad.buttons[i].pressed && !padClick && player.alive){
+      padClick = true;
+      padButton = i;
+      player_shoot();
+    }else if(!pad1._rawPad.buttons[padButton].pressed
+    && pad1._buttons[padButton].isUp){
+      //on triger release all for shooting again
+      padClick = false;
+    }
   }
 }
 

@@ -36,7 +36,8 @@ function preload_sounds(){
     "invincibility",
     "wingman",
     "wingman2",
-    "wingman3"
+    "wingman3",
+    "escape"
   ];
 
   sprites.forEach(function(sprite){

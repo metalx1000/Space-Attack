@@ -6,7 +6,7 @@ function create_powerup(){
   powerups.enableBody = true;
   wingmen = game.add.group();
   powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire",
-    "powerUpPlus","diagonal_gun2", "diagonal_gun3"];
+    "powerUpPlus","diagonal_gun2", "diagonal_gun3", "escape"];
 }
 
 function update_powerup(){
@@ -108,6 +108,9 @@ function collect_powerup(player,powerup){
     for(var i=0;i<3;i++){
       randomPowerUp();
     }
+  }else if(powerup.type == "eascape"){
+    var snd = game.add.audio("powerup");    
+    snd.play();
   }
 
   kill_powerup(powerup);

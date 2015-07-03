@@ -192,7 +192,7 @@ function wingman_backup(type,size){
     wingman.scale.setTo(size,size);
     game.physics.enable(wingman, Phaser.Physics.ARCADE);
     wingman.body.velocity.y = -300;
-    wingman.deathTime = game.time.now + 5000;
+    wingman.deathTime = game.time.now + 6000;
     wingman.shootTime = game.time.now + 300;
   } 
 }

@@ -26,6 +26,13 @@ function update_enemy(){
       enemy_wait1 = 4000;
       enemy_wait2 = 2000;
       new_enemy('boss_green',400,5,game.width/2,-512);
+    }else if(level == 6 && enemies_killed >= 400){
+      level = 7;
+      megaDetination();
+      //slow enemy attacks for a little
+      enemy_wait1 = 4000;
+      enemy_wait2 = 2000;
+      new_enemy('boss_yellow',500,5,game.width/2,-512);
     }
 
     //add blue enemies after first boss destroyed
@@ -36,12 +43,20 @@ function update_enemy(){
     if(level > 3){
       new_enemy("enemy_green",3);
     }
+    
+    if(level > 7){
+      new_enemy("enemy_yellow",1,.25,undefined,game.height);
+    }    
  
   }   
 
   enemies.forEach(function(enemy){
     if(game.time.now > enemy.shootTime && !enemy.boss){
-      shoot(enemy,10,"enemy-bullet");
+      if(enemy.rear){
+        shoot(enemy,-5,"enemy-bullet");
+      }else{
+        shoot(enemy,10,"enemy-bullet");
+      }
       enemy.shootTime = game.time.now + Math.floor(Math.random() * enemy_wait1) + 1000;
     }
 
@@ -62,7 +77,7 @@ function new_enemy(type,life,size,x,y){
   if(typeof size === 'undefined'){size = .5}
   if(typeof y === 'undefined'){y = -64}
 
-  if(typeof posx === 'undefined'){
+  if(typeof x === 'undefined'){
     //set enemy position
     //keep it from going off the side of the screen
     var x = game.world.randomX;
@@ -97,6 +112,9 @@ function new_enemy(type,life,size,x,y){
       enemy.body.velocity.x = velx;
     }
 
+  }else if(type == "enemy_yellow"){
+    enemy.rear = true;
+    enemy.speed = enemy.speed * -1;
   }
 
   enemy.body.velocity.y = enemy.speed;

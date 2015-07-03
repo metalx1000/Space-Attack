@@ -47,7 +47,7 @@ function update_enemy(){
       new_enemy("enemy_green",3);
     }
     
-    if(level > 7){
+    if(level > 5){
       new_enemy("enemy_yellow",1,.25,undefined,game.height);
     }    
  

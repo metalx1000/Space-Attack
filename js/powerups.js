@@ -240,17 +240,7 @@ function escape(){
     player.shoot = false;
     var playerTurns = game.add.tween(player);
     playerTurns.to({angle:90}, 1000);
-    playerTurns.onComplete.add(function(){
-      player.escapeTimeout = game.time.now + 2000;
-      setTimeout(function(){
-        megaDetination();
-        var playerTurns = game.add.tween(player);
-        playerTurns.to({angle:0}, 1000);
-        playerTurns.start();
-        stars.movex = false;
-        player.shoot = true;
-      },2000);
-    }, this);
+    player.escapeTimeout = game.time.now + 2000;
     playerTurns.start();
     
     //move enemies

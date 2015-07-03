@@ -35,7 +35,7 @@ function update_enemy(){
       //slow enemy attacks for a little
       enemy_wait1 = 4000;
       enemy_wait2 = 2000;
-      new_enemy('boss_yellow',500,5,game.width/2,-512);
+      new_enemy('boss_yellow',501,5,game.width/2,-512);
     }
 
     //add blue enemies after first boss destroyed

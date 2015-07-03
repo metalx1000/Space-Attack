@@ -32,6 +32,10 @@ function update_powerup(){
     if(mother.alive && game.time.now >  mother.timeout){
       mother_attack(mother);
     }
+    
+    if(mother.alive && game.time.now > mother.deathTime){
+      motherShip_death(mother);
+    }
   });
   
   if(game.time.now > player.rapidTime){
@@ -146,7 +150,7 @@ function mother_ship(){
   //shoot position
   mother.sx = -40;
   mother.timeout = game.time.now + 2000; 
- 
+  mother.deathTime = game.time.now + 10000;
   //bring ship onto screen
   var tween = game.add.tween(mother);
   tween.to({ y: game.height }, 2000);
@@ -161,19 +165,18 @@ function mother_ship(){
     tween.start();
   },500);
 
-  //move ship off screen
-  setTimeout(function(mother){
-    mother.alive = false;
-    clearInterval(mother.tween);
-    var tween = game.add.tween(mother);
-    tween.to({ y: game.height + 512 }, 2000);
-    tween.start();
-    tween.onComplete.add(function(mother){
-      bonus_points(20);
-      mother.destroy();
-    },this,mother);
-  },10000,mother);
 
+}
+
+function motherShip_death(mother){
+  mother.alive = false;
+  var tween = game.add.tween(mother);
+  tween.to({ y: game.height + 512 }, 2000);
+  tween.start();
+  tween.onComplete.add(function(mother){
+    bonus_points(20);
+    mother.destroy();
+  },this,mother);  
 }
 
 function mother_attack(mother){

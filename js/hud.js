@@ -10,6 +10,7 @@ function preload_hud(){
   game.load.image('hud_rapid_fire','res/images/hud_rapid_fire.png');
   game.load.image('hud_gamepad','res/images/hud_gamepad.png');
   game.load.image('hud_mouse_disabled','res/images/hud_mouse_disabled.png');
+  game.load.image('hud_escape','res/images/hud_escape.png');
 
   game.load.spritesheet('loading', 'res/sprites/hud_loading.png', 446, 81);
 }

@@ -216,7 +216,11 @@ function rapid_fire(){
 
 function escape(){
     //make player invincible
-    player_invincible(player,true,4,true);
+    player_invincible(player,true,4,false);
+    var snd = game.add.audio("escape");
+    snd.play();
+    
+    message("hud_escape",3000);
     
     //set original delay for new enemy spawning
     var enemy_timer = game.time.now + 5000;

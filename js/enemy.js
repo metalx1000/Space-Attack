@@ -31,6 +31,7 @@ function update_enemy(){
     }else if(level == 6 && enemies_killed >= 400){
       level = 7;
       megaDetination();
+      new_powerup("powerUpPlus");
       //slow enemy attacks for a little
       enemy_wait1 = 4000;
       enemy_wait2 = 2000;

@@ -20,6 +20,10 @@ function create_level(){
 
 function update_level(){
   stars.tilePosition.y += 2;
+
+  if(stars.movex){
+    stars.tilePosition.x -= 4;
+  }
 }
 
 function go_fullscreen(){

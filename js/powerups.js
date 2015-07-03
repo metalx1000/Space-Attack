@@ -229,6 +229,7 @@ function escape(){
     playerTurns.to({angle:90}, 1000);
     playerTurns.onComplete.add(function(){
       setTimeout(function(){
+        megaDetination();
         var playerTurns = game.add.tween(player);
         playerTurns.to({angle:0}, 1000);
         playerTurns.start();

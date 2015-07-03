@@ -41,6 +41,10 @@ function update_powerup(){
   if(game.time.now > player.rapidTime){
     rapid_fire();
   }
+  
+  if(game.time.now > player.escapeTimeout && player.shoot == false){
+    endEscape();
+  }
 }
 
 function new_powerup(type){
@@ -237,6 +241,7 @@ function escape(){
     var playerTurns = game.add.tween(player);
     playerTurns.to({angle:90}, 1000);
     playerTurns.onComplete.add(function(){
+      player.escapeTimeout = game.time.now + 2000;
       setTimeout(function(){
         megaDetination();
         var playerTurns = game.add.tween(player);
@@ -247,8 +252,6 @@ function escape(){
       },2000);
     }, this);
     playerTurns.start();
-   
-
     
     //move enemies
     enemies.forEach(function(enemy){
@@ -265,6 +268,15 @@ function escape(){
     });
     
     stars.movex = true;
+}
+
+function endEscape(){
+    megaDetination();
+    var playerTurns = game.add.tween(player);
+    playerTurns.to({angle:0}, 1000);
+    playerTurns.start();
+    stars.movex = false;
+    player.shoot = true;
 }
 
 function megaDetination(){

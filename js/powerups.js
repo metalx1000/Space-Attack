@@ -233,8 +233,8 @@ function escape(){
     
     //set original delay for new enemy spawning
     var enemy_timer = game.time.now + 5000;
-    var enemy_wait1 = 3000;
-    var enemy_wait2 = 1000;   
+    var enemy_wait1 = 5000;
+    var enemy_wait2 = 3000;   
 
     //player animation
     player.shoot = false;

@@ -33,6 +33,10 @@ function update_powerup(){
       mother_attack(mother);
     }
   });
+  
+  if(game.time.now > player.rapidTime){
+    rapid_fire();
+  }
 }
 
 function new_powerup(type){
@@ -99,7 +103,8 @@ function collect_powerup(player,powerup){
     message("hud_" + powerup.type);
     var snd = game.add.audio(powerup.type);
     snd.play();
-    rapid_fire();
+    player.rapid = 100;
+    player.rapidTime = game.time.now;
   }else if(powerup.type == "powerUpPlus"){
     var snd = game.add.audio("powerup");    
     snd.play();
@@ -204,18 +209,11 @@ function wingman_shoot(wingman){
 }
 
 function rapid_fire(){
-  var i = 0;
-  var timer = setInterval(function(){
-    if(!player.alive){
-      i=100;
+    if(player.rapid > 0){
+      shoot(player,-5,"player-bullet");
+      player.rapid -= 1;
+      player.rapidTime += 100;
     }
-
-    shoot(player,-5,"player-bullet");
-    i++;
-    if(i >= 100){
-      clearInterval(timer);
-    }
-  },100,i,timer);
 }
 
 function escape(){

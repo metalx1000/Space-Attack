@@ -28,7 +28,7 @@ function new_player(){
 
   //add ship image
   player = players.create(game.width/2,game.height-128,'player');
-  
+  player.shoot = true;
   //stop player from going off screen
   player.body.collideWorldBounds = true;
   //resize
@@ -46,27 +46,27 @@ function new_player(){
 }
 
 function player_shoot(){
-
-  if(player.weapon == "diagonal_gun"){
-    shoot(player,-5,"player-bullet",undefined,undefined,undefined,20);
-    shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
-    shoot(player,-5,"player-bullet");
-    click = 1;
-  }else if(player.weapon == "diagonal_gun2"){
-    shoot(player,-5,"player-bullet",undefined,undefined,undefined,20,"plasmaShot"); 
-    shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20,"plasmaShot"); 
-    shoot(player,5,"player-bullet",undefined,undefined,undefined,20,"plasmaShot"); 
-    shoot(player,5,"player-bullet",undefined,undefined,undefined,-20,"plasmaShot"); 
-  }else if(player.weapon == "diagonal_gun3"){
-    shoot(player,-5,"player-bullet",undefined,undefined,undefined,0,"plasmaShot"); 
-    shoot(player,0,"player-bullet",undefined,undefined,undefined,-200,"plasmaShot"); 
-    shoot(player,0,"player-bullet",undefined,undefined,undefined,200,"plasmaShot"); 
-    shoot(player,5,"player-bullet",undefined,undefined,undefined,0,"plasmaShot"); 
-  }else{
-    shoot(player,-5,"player-bullet");
-    click = 1;
+  if(player.shoot){
+    if(player.weapon == "diagonal_gun"){
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,20);
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20);
+      shoot(player,-5,"player-bullet");
+      click = 1;
+    }else if(player.weapon == "diagonal_gun2"){
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,20,"plasmaShot"); 
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,-20,"plasmaShot"); 
+      shoot(player,5,"player-bullet",undefined,undefined,undefined,20,"plasmaShot"); 
+      shoot(player,5,"player-bullet",undefined,undefined,undefined,-20,"plasmaShot"); 
+    }else if(player.weapon == "diagonal_gun3"){
+      shoot(player,-5,"player-bullet",undefined,undefined,undefined,0,"plasmaShot"); 
+      shoot(player,0,"player-bullet",undefined,undefined,undefined,-200,"plasmaShot"); 
+      shoot(player,0,"player-bullet",undefined,undefined,undefined,200,"plasmaShot"); 
+      shoot(player,5,"player-bullet",undefined,undefined,undefined,0,"plasmaShot"); 
+    }else{
+      shoot(player,-5,"player-bullet");
+      click = 1;
+    }
   }
-
 
 }
 

@@ -108,9 +108,8 @@ function collect_powerup(player,powerup){
     for(var i=0;i<3;i++){
       randomPowerUp();
     }
-  }else if(powerup.type == "eascape"){
-    var snd = game.add.audio("powerup");    
-    snd.play();
+  }else if(powerup.type == "escape"){
+    escape();
   }
 
   kill_powerup(powerup);
@@ -222,4 +221,47 @@ function rapid_fire(){
       clearInterval(timer);
     }
   },100,i,timer);
+}
+
+function escape(){
+    //make player invincible
+    player_invincible(player,true,4,true);
+    
+    //set original delay for new enemy spawning
+    var enemy_timer = game.time.now + 5000;
+    var enemy_wait1 = 3000;
+    var enemy_wait2 = 1000;   
+
+    //player animation
+    player.shoot = false;
+    var playerTurns = game.add.tween(player);
+    playerTurns.to({angle:90}, 1000);
+    playerTurns.onComplete.add(function(){
+      setTimeout(function(){
+        var playerTurns = game.add.tween(player);
+        playerTurns.to({angle:0}, 1000);
+        playerTurns.start();
+        stars.movex = false;
+        player.shoot = true;
+      },2000);
+    }, this);
+    playerTurns.start();
+   
+
+    
+    //move enemies
+    enemies.forEach(function(enemy){
+      enemy.body.velocity.x = -400;
+    });
+    
+    //move bullets
+    enemyBullets.forEach(function(bullet){
+      bullet.body.velocity.x = -400;
+    });
+    
+    playerBullets.forEach(function(bullet){
+      bullet.body.velocity.x = -400;
+    });
+    
+    stars.movex = true;
 }

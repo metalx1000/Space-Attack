@@ -5,6 +5,7 @@ function create_powerup(){
   powerups = game.add.group();
   powerups.enableBody = true;
   wingmen = game.add.group();
+  motherShip = game.add.group();
   powerup_list = ["missile2","wingman","wingman2","invincibility","diagonal_gun","rapid_fire",
     "powerUpPlus","diagonal_gun2", "diagonal_gun3", "escape"];
 }
@@ -24,6 +25,12 @@ function update_powerup(){
     }
     if(game.time.now > wingman.deathTime){
       wingman.destroy();
+    }
+  });
+
+  motherShip.forEach(function(mother){
+    if(mother.alive && game.time.now >  mother.timeout){
+      mother_attack(mother);
     }
   });
 }
@@ -127,13 +134,14 @@ function bonus_points(amount){
 
 function mother_ship(){
   message("hud_mother_ship");
-  var mother = game.add.sprite(game.width/2,game.height+512,"player");
+  mother = motherShip.create(game.width/2,game.height+512,"player");
   mother.anchor.setTo(.5,.5);
   mother.scale.setTo(5,5);
 
   //shoot position
   mother.sx = -40;
-
+  mother.timeout = game.time.now + 2000; 
+ 
   //bring ship onto screen
   var tween = game.add.tween(mother);
   tween.to({ y: game.height }, 2000);
@@ -150,11 +158,13 @@ function mother_ship(){
 
   //move ship off screen
   setTimeout(function(mother){
+    mother.alive = false;
     clearInterval(mother.tween);
     var tween = game.add.tween(mother);
     tween.to({ y: game.height + 512 }, 2000);
     tween.start();
     tween.onComplete.add(function(mother){
+      bonus_points(20);
       mother.destroy();
     },this,mother);
   },10000,mother);
@@ -163,20 +173,14 @@ function mother_ship(){
 
 function mother_attack(mother){
   var y = game.height - 256;
+  mother.timeout += 100;
+  mother.sx +=50;
+  x = mother.sx;
+  if(x > game.width){
+    mother.sx = -40;
+  }  
+  shoot(undefined,-5,"player-bullet",2,x,y);
   
-  var s = setInterval(function(mother,y){
-    mother.sx +=50;
-    x = mother.sx;
-    if(x > game.width){
-      mother.sx = -40;
-    }  
-    shoot(undefined,-5,"player-bullet",2,x,y);
-  },100,mother,y);
-
-  setTimeout(function(){
-    clearInterval(s);
-    bonus_points(20); 
-  },5000);
 }
 
 function wingman_backup(type,size){

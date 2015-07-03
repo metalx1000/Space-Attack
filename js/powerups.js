@@ -59,16 +59,7 @@ function kill_powerup(powerup){
 
 function collect_powerup(player,powerup){
   if(powerup.type == "missile2"){
-    message("mega1");
-    var snd = game.add.audio("mega1");
-    snd.play();
-    bonus_points(20);
-    enemies.forEach(function(enemy){
-      if(!enemy.boss){
-        var i = Math.floor(Math.random() * 300) + 100;
-        game.time.events.add(i , enemy_death, this, enemy);
-      }
-    });
+    megaDetination();
   }else if(powerup.type == "wingman"){
     var snd = game.add.audio(powerup.type);
     snd.play();
@@ -264,4 +255,17 @@ function escape(){
     });
     
     stars.movex = true;
+}
+
+function megaDetination(){
+    message("mega1");
+    var snd = game.add.audio("mega1");
+    snd.play();
+    bonus_points(20);
+    enemies.forEach(function(enemy){
+      if(!enemy.boss){
+        var i = Math.floor(Math.random() * 300) + 100;
+        game.time.events.add(i , enemy_death, this, enemy);
+      }
+    });
 }

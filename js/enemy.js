@@ -25,16 +25,16 @@ function update_enemy(){
       megaDetination();
       new_powerup("powerUpPlus");
       //slow enemy attacks for a little
-      enemy_wait1 = 4000;
-      enemy_wait2 = 2000;
+      enemy_wait1 = 10000;
+      enemy_wait2 = 5000;
       new_enemy('boss_green',400,5,game.width/2,-512);
     }else if(level == 6 && enemies_killed >= 400){
       level = 7;
       megaDetination();
       new_powerup("powerUpPlus");
       //slow enemy attacks for a little
-      enemy_wait1 = 4000;
-      enemy_wait2 = 2000;
+      enemy_wait1 = 10000;
+      enemy_wait2 = 5000;
       new_enemy('boss_yellow',500,5,game.width/2,-512);
     }
 

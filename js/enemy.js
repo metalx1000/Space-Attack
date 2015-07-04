@@ -141,9 +141,10 @@ function new_enemy(type,life,size,x,y){
   var delay = Math.floor(Math.random() * enemy_wait1) + enemy_wait2
   if(enemy_wait1 > 2000){
     enemy_wait1-=10
-  }
-  if(enemy_wait2 > 500){
     enemy_wait2-=10
+  }else if(enemy_wait1 < 2000 && level > 5){
+    enemy_wait1 = 8000
+    enemy_wait2 = 4000   
   }
 
   enemy_timer = game.time.now + delay

@@ -38,7 +38,7 @@ function update_powerup(){
     }
   });
   
-  if(game.time.now > player.rapidTime){
+  if(game.time.now > player.rapidTime && player.alive){
     rapid_fire();
   }
   

@@ -22,6 +22,11 @@ function update_weapons(){
       ||game.time.now > bullet.timeout){
       bullet.destroy();
     }
+    
+    if(game.time.now > bullet.explodeTime){
+      explosion(bullet);
+      bullet.destroy();
+    }
   });
 
   enemyBullets.forEach(function(bullet){
@@ -49,10 +54,7 @@ function shot(bullet,object){
     object.life-=1;
     hit(object);
     var delay = Math.floor(Math.random() * 400) + 200;
-    setTimeout(function(){
-      explosion(bullet);
-      bullet.kill();
-    },delay);
+    bullet.explodeTime = game.time.now + delay;
 
   }else if(!object.boss){
     bullet.kill();
